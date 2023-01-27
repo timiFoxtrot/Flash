@@ -1,6 +1,9 @@
 import express from "express";
+const connectDB = require("./db")
 const memoryRouter = require("./routes/memory")
 const app = express();
+
+connectDB();
 
 app.use(express.json());
 
