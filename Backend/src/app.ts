@@ -1,12 +1,12 @@
 import express from "express";
-import connectDB from "./db" ;
-import memoryRouter from"./routes/memoryRoutes" ;
+import { connectDatabase } from "./db";
+import memoryRouter from "./routes/memoryRoutes";
 
 import userRouter from "./routes/userRoutes";
 
 const app = express();
 
-connectDB();
+connectDatabase();
 
 app.use(express.json());
 
