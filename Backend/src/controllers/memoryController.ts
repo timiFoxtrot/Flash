@@ -64,3 +64,30 @@ export const updateMemory = async (
     });
   }
 };
+
+
+export const deleteMemory = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const memory = await Memory.findByIdAndRemove({ _id: req.params.id });
+    if (!memory) {
+      res.status(400).json({
+      status: "fail",
+      message: `No memory with id: ${req.params.id} exist`,
+      }) 
+    } else {
+      res.status(200).json({
+      status: "success",
+      data: {
+        memory,
+        },
+      });
+    }
+    
+
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    });
+  }
+}
