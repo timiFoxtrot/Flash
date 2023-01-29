@@ -44,3 +44,24 @@ export const getAllUsers = async (
     });
   }
 };
+
+export const loginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password } = req.body;
+    console.log(req.body);
+    const user = await User.findUserByCredentials(email, password);
+    console.log(user);
+    const token = await user.genUserAuthToken();
+    console.log(token);
+
+    res.send({ user, token });
+  } catch (error) {
+    res.status(400).json({
+      error
+    });
+  }
+};
