@@ -1,4 +1,9 @@
 import express from "express";
+
+import * as dotenv from "dotenv"
+
+dotenv.config()
+
 import { connectDatabase } from "./db";
 import memoryRouter from "./routes/memoryRoutes";
 
