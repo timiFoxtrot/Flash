@@ -1,23 +1,20 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import Memory from "../models/memory";
 
-interface Post {
-  user_name?: string;
-  photo?: string;
-  title?: string;
-  description?: string;
-  location?: string;
-  likes?: number;
-  date_created?: string;
-  date_updated?: string;
-  comments?: [{ user: string; comment: string }];
-}
 
 export const createMemory = async (req: Request, res: Response) => {
-  try {
-    const newMemory = new Memory({ ...req.body });
-    await newMemory.save();
+  const filename = req.file !== null ? req.file?.filename : null;
+  const memory = new Memory({
+    user_name: "cypher",
+    photo: filename,
+    title: "Jumping",
+    description: "lorem description two four four",
+    location: "America",
+    comments: [{ user: "you the best" }]
+  });
 
+  try {
+    const newMemory = await memory.save();
     res.status(201).json({
       status: "success",
       data: {

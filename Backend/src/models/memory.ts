@@ -25,12 +25,11 @@ const memorySchema = new Schema(
       required: true,
     },
     likes: { type: Number },
-    date_created: { type: String },
-    date_updated: { type: String },
-    comments: [{ type: String }],
+    comments: [{ user: { type: String } }],
   },
   { timestamps: true }
 );
+
 
 const Memory = mongoose.model("Memory", memorySchema);
 
