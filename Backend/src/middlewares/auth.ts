@@ -12,7 +12,7 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
   if (bearerHeader !== undefined) {
     const bearerToken = bearerHeader.split(' ')[1]
     req.token = bearerToken
-    console.log('req.token',req.token);
+    console.log('req.token', req.token);
     next()
   } else {
     res.sendStatus(403)
