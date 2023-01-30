@@ -6,7 +6,7 @@ import { auth } from "../middlewares/auth";
 import { Upload } from "../middlewares/imageUpload";
 const router = express.Router();
 
-router.post("/memories", auth, Upload.single("image"), createMemory);
+router.post("/memories", Upload.single("image"), createMemory);
 router.patch("/memories/:id", auth, updateMemory)
 router.get("/memories/:id", auth, getOwnMemory)
 router.get('/memories', auth, getAllUsers)

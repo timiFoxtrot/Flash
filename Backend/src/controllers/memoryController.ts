@@ -3,16 +3,17 @@ import Memory from "../models/memory";
 import User from "../models/user";
 
 export const createMemory = async (req: Request, res: Response) => {
-  const filename = req.file !== null ? req.file?.filename : null;
+  const filename = req.file !== null ? req.file?.originalname : null;
+
   const memory = new Memory({
-    user_id: req._id,
-    user_name: req.user_name,
-    photo: filename,
-    title: "Jumping",
-    description: "lorem description two four four",
-    location: "America",
-    comments: [{ user: "you the best" }],
+    user_name: req.body.user_name,
+    photo: req.file,
+    title: req.body.title,
+    description: req.body.description,
+    location: req.body.location,
+    comments: [{ user: "you the best" }]
   });
+
 
   try {
     const newMemory = await memory.save();
@@ -73,7 +74,7 @@ export const getOwnMemory = async (
   try {
     const ownMemory = await Memory.find({ user_id: id });
 
-    if(!ownMemory) {
+    if (!ownMemory) {
       res.status(404).json({
         status: "success",
         message: "You have not created any memory"
