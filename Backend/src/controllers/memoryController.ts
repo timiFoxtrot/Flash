@@ -5,28 +5,30 @@ import Memory from "../models/memory";
 export const createMemory = async (req: Request, res: Response) => {
   const filename = req.file !== null ? req.file?.filename : null;
   const memory = new Memory({
-    user_name: "cypher",
+    user_name: req.body.user_name,
     photo: filename,
-    title: "Jumping",
-    description: "lorem description two four four",
-    location: "America",
+    title: req.body.title,
+    description: req.body.description,
+    location: req.body.location,
     comments: [{ user: "you the best" }]
   });
 
-  try {
-    const newMemory = await memory.save();
-    res.status(201).json({
-      status: "success",
-      data: {
-        memory: newMemory,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-      message: error,
-    });
-  }
+  console.log(memory)
+
+  // try {
+  //   const newMemory = await memory.save();
+  //   res.status(201).json({
+  //     status: "success",
+  //     data: {
+  //       memory: newMemory,
+  //     },
+  //   });
+  // } catch (error) {
+  //   res.status(400).json({
+  //     status: "fail",
+  //     message: error,
+  //   });
+  // }
 };
 
 export const updateMemory = async (
