@@ -1,16 +1,17 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import Memory from "../models/memory";
-
+import User from "../models/user";
 
 export const createMemory = async (req: Request, res: Response) => {
   const filename = req.file !== null ? req.file?.filename : null;
   const memory = new Memory({
-    user_name: "cypher",
+    user_id: req._id,
+    user_name: req.user_name,
     photo: filename,
     title: "Jumping",
     description: "lorem description two four four",
     location: "America",
-    comments: [{ user: "you the best" }]
+    comments: [{ user: "you the best" }],
   });
 
   try {
@@ -52,6 +53,76 @@ export const updateMemory = async (
       status: "success",
       data: {
         memory,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+export const getOwnMemory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = req._id;
+  const userName = req.user_name;
+  try {
+    const ownMemory = await Memory.find({ user_id: id });
+
+    if(!ownMemory) {
+      res.status(404).json({
+        status: "success",
+        message: "You have not created any memory"
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        memory: ownMemory,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+export const getMemoryByUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { user_name } = req.body;
+  try {
+    const user = await User.findOne({ user_name });
+
+    if (!user) {
+      res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+
+    const userMemories = await Memory.find({ user_name });
+
+    if (!userMemories) {
+      res.status(404).json({
+        status: "fail",
+        message: "User has not created a memory"
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        memory: userMemories,
       },
     });
   } catch (error) {
