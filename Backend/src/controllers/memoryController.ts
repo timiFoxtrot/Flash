@@ -13,23 +13,20 @@ export const createMemory = async (req: Request, res: Response) => {
     comments: [{ user: "you the best" }]
   });
 
-  console.log(memory)
-  res.status(200).json(memory)
-
-  // try {
-  //   const newMemory = await memory.save();
-  //   res.status(201).json({
-  //     status: "success",
-  //     data: {
-  //       memory: newMemory,
-  //     },
-  //   });
-  // } catch (error) {
-  //   res.status(400).json({
-  //     status: "fail",
-  //     message: error,
-  //   });
-  // }
+  try {
+    const newMemory = await memory.save();
+    res.status(201).json({
+      status: "success",
+      data: {
+        memory: newMemory,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
 };
 
 export const updateMemory = async (
