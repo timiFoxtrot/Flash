@@ -12,8 +12,8 @@ import userRouter from "./routes/userRoutes";
 const app = express();
 
 
-app.use(express.json());
 app.use(cors())
+app.use(express.json());
 const dirname = path.resolve();
 app.use('/images', express.static(path.join(dirname, '/images')));
 

@@ -24,11 +24,10 @@ const CreateMemory = () => {
         formData.append("description", description)
         formData.append("location", location)
         formData.append("image", file)
-
         const URL = "http://localhost:4000/api/memories";
         const response = await axios.post(URL, formData)
-        setState(response.data)
-        console.log(response.data)
+        setState(response.data.path)
+        console.log(response.data.path)
     }
 
 
