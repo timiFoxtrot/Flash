@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { StyledCreateMemory } from "../styles/createMemory.styled";
 import axios from "axios";
+import { useContext } from "react";
+import { MemoryContext } from "../contexts/memoryContext";
 
 const CreateMemory = () => {
+    const { state, setState } = useContext(MemoryContext)
     const [creator, setCreator] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -22,12 +25,12 @@ const CreateMemory = () => {
         formData.append("location", location)
         formData.append("image", file)
 
-        const URL = "https://localhost:4000/api/memories";
-        const response = await axios.post(URL, formData, {
-            headers: { "Content-Type": "multipart/form-data" }
-        })
-        console.log(response)
+        const URL = "http://localhost:4000/api/memories";
+        const response = await axios.post(URL, formData)
+        setState(response.data)
+        console.log(response.data)
     }
+
 
     return (
         <StyledCreateMemory>
@@ -35,7 +38,7 @@ const CreateMemory = () => {
                 <p>Create new memory</p>
             </div>
             <hr />
-            <form onSubmit={handleCreate}>
+            <form onSubmit={handleCreate} encType="multipart/form-data">
                 <div className="user field">
                     <label>creator</label>
                     <input

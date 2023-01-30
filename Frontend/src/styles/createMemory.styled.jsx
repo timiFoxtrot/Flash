@@ -15,7 +15,7 @@ export const StyledCreateMemory = styled.div`
  font-size: 16px;
  border-radius: 6px;
  z-index: 20;
- display: none;
+ /* display: none; */
 
  form{
     display: flex;

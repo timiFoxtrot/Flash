@@ -3,10 +3,10 @@ import Memory from "../models/memory";
 
 
 export const createMemory = async (req: Request, res: Response) => {
-  const filename = req.file !== null ? req.file?.filename : null;
+  // const filename = req.file !== null ? req.file?.originalname : null;
   const memory = new Memory({
     user_name: req.body.user_name,
-    photo: filename,
+    photo: req.file?.originalname,
     title: req.body.title,
     description: req.body.description,
     location: req.body.location,
@@ -14,6 +14,7 @@ export const createMemory = async (req: Request, res: Response) => {
   });
 
   console.log(memory)
+  res.status(200).json(memory)
 
   // try {
   //   const newMemory = await memory.save();
