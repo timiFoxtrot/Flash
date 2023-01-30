@@ -1,9 +1,9 @@
-import SideBar from "./components/sidebar";
+import LandingPage from "./pages/LandingPage";
 function App() {
   return (
     <div className="App">
-      <h1>Heloo Flashy People</h1>
-      <SideBar />
+      {/* <SideBar /> */}
+      <LandingPage />
     </div>
   );
 }
