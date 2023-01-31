@@ -1,52 +1,53 @@
-import { FaHome } from "react-icons/fa"
+import { FaBars, FaBell, FaCog, FaHome, FaMoon, FaPlus, FaSearch, FaUser } from "react-icons/fa"
 import { StyledSidebar } from "../styles/sidebar.styled";
+import CreateMemory from "./addMemoryForm";
+import SearchBarDestop from "./searchBarDesktop";
 const SideBar = () => {
     return (
         <StyledSidebar>
+            <SearchBarDestop />
+            <CreateMemory />
             <div>
                 <div className="logo">Flash</div>
                 <ul className="navLinks">
                     <li>
-                        <FaHome />
+                        <FaHome className="link-icon" />
                         <span>Home</span>
                     </li>
                     <li>
-                        <FaHome />
-                        <span>Home</span>
+                        <FaSearch className="link-icon" />
+                        <span>Search</span>
                     </li>
                     <li>
-                        <FaHome />
-                        <span>Home</span>
+                        <FaBell className="link-icon" />
+                        <span>Notifications</span>
                     </li>
                     <li>
-                        <FaHome />
-                        <span>Home</span>
+                        <FaPlus className="link-icon" />
+                        <span>Create</span>
                     </li>
                     <li>
-                        <FaHome />
-                        <span>Home</span>
+                        <FaUser className="link-icon" />
+                        <span>Profile</span>
                     </li>
                 </ul>
             </div>
-            <div>
-                <ul>
-                    <li>
-                        <span>Settings</span>
-                        <FaHome />
-                    </li>
-                    <li>
-                        <span>Switch Appearance</span>
-                        <FaHome />
-                    </li>
-                    <li>
-                        <span>Log out</span>
-                        <FaHome />
-                    </li>
-                </ul>
-                <div>
-                    <FaHome />
-                    <span>More</span>
-                </div>
+            <ul className="more">
+                <li>
+                    <span>Settings</span>
+                    <FaCog className="setting-icon" />
+                </li>
+                <li>
+                    <span>Switch Appearance</span>
+                    <FaMoon className="setting-icon" />
+                </li>
+                <li>
+                    <span>Log out</span>
+                </li>
+            </ul>
+            <div className="moreBtn">
+                <FaBars className="link-icon" />
+                <span>More</span>
             </div>
         </StyledSidebar>
     );
