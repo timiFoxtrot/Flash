@@ -6,14 +6,14 @@ export const createMemory = async (req: Request, res: Response) => {
   const filename = req.file !== null ? req.file?.originalname : null;
 
   const memory = new Memory({
-    user_name: req.body.user_name,
+    user_name: req.user_name,
+    user_id: req._id,
     photo: req.file,
     title: req.body.title,
     description: req.body.description,
     location: req.body.location,
-    comments: [{ user: "you the best" }]
+    comments: [{ user: "you the best" }],
   });
-
 
   try {
     const newMemory = await memory.save();
@@ -77,7 +77,7 @@ export const getOwnMemory = async (
     if (!ownMemory) {
       res.status(404).json({
         status: "success",
-        message: "You have not created any memory"
+        message: "You have not created any memory",
       });
     }
 
@@ -116,7 +116,7 @@ export const getMemoryByUser = async (
     if (!userMemories) {
       res.status(404).json({
         status: "fail",
-        message: "User has not created a memory"
+        message: "User has not created a memory",
       });
     }
 
@@ -133,3 +133,41 @@ export const getMemoryByUser = async (
     });
   }
 };
+
+export const getAllMemories = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const memories = await Memory.find({});
+
+    res.status(200).json({
+      status: "success",
+      results: memories.length,
+      data: {
+        memories,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+export const deleteMemory = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await Memory.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error,
+    });
+  }
+}

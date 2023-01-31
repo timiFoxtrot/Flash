@@ -24,12 +24,16 @@ const memorySchema = new Schema(
       type: String,
       required: true,
     },
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     likes: { type: Number },
     comments: [{ user: { type: String } }],
   },
   { timestamps: true }
 );
-
 
 const Memory = mongoose.model("Memory", memorySchema);
 
