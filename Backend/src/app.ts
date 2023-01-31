@@ -17,7 +17,7 @@ app.use(express.json());
 const dirname = path.resolve();
 app.use('/images', express.static(path.join(dirname, '/images')));
 
-app.use("/api", memoryRouter);
+app.use("/api/memories", memoryRouter);
 app.use("/api/users", userRouter)
 
 connectDatabase(app);

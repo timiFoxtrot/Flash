@@ -47,6 +47,11 @@ export const updateMemory = async (
 
   try {
     const memory: any = await Memory.findOne({ _id: req.params.id });
+
+    if (!memory) {
+      res.status(404).send()
+    }
+    
     updates.forEach((update) => (memory[update] = req.body[update]));
     await memory.save();
 
@@ -157,12 +162,20 @@ export const getAllMemories = async (
   }
 };
 
-export const deleteMemory = async (req: Request, res: Response, next: NextFunction) => {
+export const getSingleMemory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = req.params.id;
   try {
-    await Memory.findByIdAndDelete(req.params.id);
-    res.status(204).json({
+    const memory = await Memory.findById(id);
+
+    res.status(200).json({
       status: "success",
-      data: null,
+      data: {
+        memory,
+      },
     });
   } catch (error) {
     res.status(404).json({
@@ -170,4 +183,30 @@ export const deleteMemory = async (req: Request, res: Response, next: NextFuncti
       message: error,
     });
   }
-}
+};
+
+export const deleteMemory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const memory = await Memory.findOneAndDelete({
+      _id: req.params.id
+    });
+
+    if (!memory) {
+      res.status(404).send();
+    }
+
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
