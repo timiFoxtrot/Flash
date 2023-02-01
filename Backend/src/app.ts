@@ -6,7 +6,6 @@ dotenv.config()
 
 import { connectDatabase } from "./db";
 import memoryRouter from "./routes/memoryRoutes";
-import path from "path";
 import userRouter from "./routes/userRoutes";
 
 const app = express();

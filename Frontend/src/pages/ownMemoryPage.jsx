@@ -1,5 +1,6 @@
 import { StyledOwnMemoryPage } from "../styles/ownMemory.styled";
-
+import OwnMemoryImageCard from "../components/ownMemoryCard";
+import { Link } from "react-router-dom";
 const OwnMemoryPage = () => {
     return (
         <StyledOwnMemoryPage>
@@ -9,60 +10,18 @@ const OwnMemoryPage = () => {
                     <div>
                         <div className="flex2">
                             <span>akaricypher</span>
-                            <span>Edit Profile</span>
+                            <span className="editprofile">Edit Profile</span>
                         </div>
                         <div>12 posts</div>
                     </div>
                 </header>
                 <section className="grid">
-                    <div className="ownCardImage">
-                        <img src="ass" alt="ff" />
-                        <div>
-                            <span>1</span>
-                            <span>1</span>
-                            <span>1</span>
-                        </div>
-                    </div>
-                    <div className="ownCardImage">
-                        <img src="ass" alt="ff" />
-                        <div>
-                            <span>1</span>
-                            <span>1</span>
-                            <span>1</span>
-                        </div>
-                    </div>
-                    <div className="ownCardImage">
-                        <img src="ass" alt="ff" />
-                        <div>
-                            <span>1</span>
-                            <span>1</span>
-                            <span>1</span>
-                        </div>
-                    </div>
-                    <div className="ownCardImage">
-                        <img src="ass" alt="ff" />
-                        <div>
-                            <span>1</span>
-                            <span>1</span>
-                            <span>1</span>
-                        </div>
-                    </div>
-                    <div className="ownCardImage">
-                        <img src="ass" alt="ff" />
-                        <div>
-                            <span>1</span>
-                            <span>1</span>
-                            <span>1</span>
-                        </div>
-                    </div>
-                    <div className="ownCardImage">
-                        <img src="ass" alt="ff" />
-                        <div>
-                            <span>1</span>
-                            <span>1</span>
-                            <span>1</span>
-                        </div>
-                    </div>
+                    <Link to="/home/singleMemoryPage"><OwnMemoryImageCard /></Link>
+                    <Link to="/home/singleMemoryPage"><OwnMemoryImageCard /></Link>
+                    <Link to="/home/singleMemoryPage"><OwnMemoryImageCard /></Link>
+                    <Link to="/home/singleMemoryPage"><OwnMemoryImageCard /></Link>
+                    <Link to="/home/singleMemoryPage"><OwnMemoryImageCard /></Link>
+                    <Link to="/home/singleMemoryPage"><OwnMemoryImageCard /></Link>
                 </section>
             </div>
         </StyledOwnMemoryPage>

@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 import CreateMemory from "./addMemoryForm";
 import SearchBarDestop from "./searchBarDesktop";
 import { ThemeConText } from "../contexts/themeContext";
-
+import { ModalContext } from "../contexts/modalContext";
 
 const SideBar = () => {
+    const { modals, setModals } = useContext(ModalContext)
     const { theme, setTheme } = useContext(ThemeConText)
-    const [createModal, setCreateModal] = useState(false)
     const [searchModal, setSearchModal] = useState(false)
     const [more, setMore] = useState(false)
+
     const handleCreateModal = () => {
-        setCreateModal(!createModal)
+        setModals({ ...modals, createModal: true })
     }
     const handleSearchModal = () => {
         setSearchModal(!searchModal)
@@ -34,9 +35,9 @@ const SideBar = () => {
 
     return (
         <StyledSidebar>
-            {createModal && <div className="shadow"></div>}
+            {modals.createModal && <div onClick={() => setModals({ ...modals, createModal: false })} className="shadow"></div>}
             {searchModal && <SearchBarDestop handleClose={handleCloseSearchModal} />}
-            {createModal && <CreateMemory handleCreateModal={handleCreateModal} />}
+            {modals.createModal && <CreateMemory />}
             <div>
                 <div className="logo">Flash</div>
                 <ul className="navLinks">

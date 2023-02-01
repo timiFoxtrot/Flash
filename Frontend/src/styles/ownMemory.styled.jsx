@@ -13,11 +13,13 @@ export const StyledOwnMemoryPage = styled.section`
 
   header{
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     border-bottom: 1px solid red;
     padding: 20px 0;
   }
+
+ 
 
   .img{
     width: 200px;
@@ -29,13 +31,10 @@ export const StyledOwnMemoryPage = styled.section`
   }
 
   .flex2{
-    border: 1px solid red;
     margin-bottom: 40px;
   }
 
-  .flex2 span{
-    margin-right: 60px;
-  }
+  
 
   .grid{
     display: grid;
@@ -50,5 +49,6 @@ export const StyledOwnMemoryPage = styled.section`
     max-width: 100%;
     border: 1px solid #000;
     border-radius: 3px;
+   position: relative;
   }
 `
