@@ -1,6 +1,6 @@
 import express from "express";
 import { Request, Response } from "express";
-import { createMemory, deleteMemory, getMemories, updateMemory } from "../controllers/memoryController";
+import { createMemory, deleteMemory, updateMemory } from "../controllers/memoryController";
 const Memory = require("../models/memory");
 
 const router = express.Router();
