@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/static", express.static("assets/uploads"));
 
 
-app.use("/api", memoryRouter);
+app.use("/api/memories", memoryRouter);
 app.use("/api/users", userRouter)
 
 connectDatabase(app);

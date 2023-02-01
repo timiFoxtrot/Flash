@@ -1,8 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Model, Schema, HydratedDocument, model } from "mongoose";
 
-const Schema = mongoose.Schema;
 
-const memorySchema = new Schema(
+interface IMemory {
+  user_name: string;
+  photo: any;
+  title: string;
+  description: string;
+  location: string;
+  user_id: any;
+  likes: number;
+  comments: any;
+  _id: any
+}
+
+const memorySchema = new Schema<IMemory>(
   {
     user_name: {
       type: String,
@@ -34,6 +45,6 @@ const memorySchema = new Schema(
   { timestamps: true }
 );
 
-const Memory = mongoose.model("Memory", memorySchema);
+const Memory = model<IMemory>("Memory", memorySchema);
 
 export default Memory;

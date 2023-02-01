@@ -54,10 +54,6 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
   },
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
 });
 
 //Hash a plain text password before saving
@@ -111,6 +107,14 @@ userSchema.virtual("myMemories", {
   ref: "Memory",
   localField: "_id",
   foreignField: "user_id",
+});
+
+userSchema.pre("remove", async function (next) {
+  const user: any = this;
+
+  await Memory.deleteMany({ user_id: user._id });
+
+  next();
 });
 
 const User = model<IUser, UserModel>("User", userSchema);

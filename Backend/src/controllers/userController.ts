@@ -8,13 +8,9 @@ export const createUser = async (
 ) => {
   try {
     const newUser = await User.create(req.body);
+    const token = await newUser.genUserAuthToken();
 
-    res.status(201).json({
-      status: "success",
-      data: {
-        user: newUser,
-      },
-    });
+    res.status(201).send({ newUser, token });
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -52,16 +48,33 @@ export const loginUser = async (
 ) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
     const user = await User.findUserByCredentials(email, password);
-    console.log(user);
     const token = await user.genUserAuthToken();
-    console.log(token);
 
     res.send({ user, token });
   } catch (error) {
     res.status(400).json({
-      error
+      error,
+    });
+  }
+};
+
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = req._id;
+  try {
+    const user = await User.findById(id);
+
+    if (user !== null) {
+      await user.remove();
+      res.status(204);
+    }
+  } catch (error) {
+    res.status(400).json({
+      error,
     });
   }
 };
