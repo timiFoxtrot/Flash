@@ -4,6 +4,7 @@ import User from "../models/user";
 
 export const createMemory = async (req: Request, res: Response) => {
   console.log(req.file);
+  console.log('USERID>>', req._id);
   const memory = new Memory({
     user_id: req._id,
     user_name: req.body.user_name,
