@@ -18,6 +18,7 @@ code {
     monospace;
 }
 
+
 /* Landing page Down ....................................................... */
 .landingPage__container {
   width: 100%;
@@ -65,14 +66,17 @@ code {
 
 
 }
-.white{
-  color:white;
+
+.white {
+  color: white;
 }
-.black{
-  color:black;
+
+.black {
+  color: black;
 }
-.darkblue{
-  color:#003366;
+
+.darkblue {
+  color: #003366;
 }
 
 .nav-link-a {
@@ -102,7 +106,7 @@ code {
   background-color: black;
   border-radius: 50px;
   margin-right: 5px;
-  color:rgb(207, 145, 145);
+  color: rgb(207, 145, 145);
   color: white;
 
   text-decoration: none;
@@ -117,7 +121,7 @@ code {
 /* .App{
   display: flex;
 } */
-.main-app{
+.main-app {}
 
 .main-app {
   width: 100%;
@@ -153,15 +157,15 @@ code {
   z-index: 8;
 }
 
-.shift-provide{
-  width:140px;
+.shift-provide {
+  width: 140px;
   height: 41px;
   background-color: #d2bdaf;
   display: inline-flex;
   position: absolute;
-  top:78px;
-  left:0px;
-
+  top: 78px;
+  left: 0px;
+}
 
 .shift-provide {
   width: 140px;
@@ -174,18 +178,19 @@ code {
 
   z-index: 2;
   border-top-left-radius: 50px;
-  background-image:linear-gradient(to left, rgb(255, 255, 255) , rgb(202, 179, 179));
+  background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(202, 179, 179));
 }
 
-.provide2{
-  width:140px;
-  height:41px;
-  background-image:linear-gradient(to left, rgb(191, 74, 14) , rgb(255, 755, 255));
+.provide2 {
+  width: 140px;
+  height: 41px;
+  background-image: linear-gradient(to left, rgb(191, 74, 14), rgb(255, 755, 255));
 
   display: inline-flex;
   position: absolute;
-  top:153px;
-  left:150px;
+  top: 153px;
+  left: 150px;
+}
 
 .provide2 {
   width: 140px;
@@ -220,51 +225,59 @@ code {
 
 
 /* NAVE BAR SECTION .......................... */
-.navbar{
-  width:50%;
+.navbar {
+  width: 50%;
   height: auto;
   position: relative;
   z-index: 8;
-  left:25%
+  left: 25%
 }
-.app-header{
-  width:100%;
-  height: 50px;;
+
+.app-header {
+  width: 100%;
+  height: 50px;
+  ;
 }
-.nave-bar-row{
-  width:100%;
-  height:100%;
+
+.nave-bar-row {
+  width: 100%;
+  height: 100%;
   overflow: scroll;
   display: flex;
 }
-.box{
-  width:80px;height: 80px;
-  border-radius: 30px;
-  border:2px solid purple;
+
+.box {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid purple;
 }
-.arrangeBox{
-  width:90px;
+
+.arrangeBox {
+  width: 90px;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-left:10px
-
+  margin-left: 10px
 }
-.arrangeBox p{
+
+.arrangeBox p {
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 12px;
 }
-.box img{
-  width:100%;
+
+.box img {
+  width: 100%;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 50%;
 }
-.nave-bar-container{
-  width:auto;
-  height:98%;
+
+.nave-bar-container {
+  width: auto;
+  height: 98%;
   position: relative;
   display: flex;
   padding: 5px;
@@ -272,69 +285,85 @@ code {
 
 
 /* MEMOERY CARD ........................................... */
-.public{
-  width:50%;
+.public {
+  width: 50%;
   height: auto;
   position: relative;
   z-index: 8;
-  left:25%;
+  left: 25%;
   border-radius: 15px;
 }
-.public__header{
-  width:100%;
+
+.public__header {
+  width: 100%;
   height: auto;
 }
-.rows1{
-  width:97%;
-  height:auto;
-  margin:10px;
+
+.rows1 {
+  width: 97%;
+  height: auto;
+  margin: 10px;
   margin-bottom: 50px;
   background-color: #222;
   border-radius: 15px;
 }
-.content-div{
-  width:100%;
+
+.content-div {
+  width: 100%;
   height: 400px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 
 }
-.sectin-div{
-  width:100%;
-  height:auto;
+
+/* .content-div .flex {
+  display: flex;
+} */
+
+.sectin-div {
+  width: 100%;
+  height: auto;
   padding: 5px;
 }
-.sectin-div p,.sectin-div h1 {
+
+.sectin-div p,
+.sectin-div h1 {
   margin: 20px;
 
 }
-.content-div p{
+
+.content-div p {
   margin: 20px;
   padding-top: 20px;
   letter-spacing: 2px;
   line-height: 4px;
 }
-.sectin-div p{
+
+.sectin-div p {
   line-height: 30px;
 }
-.like-delete{
-  width:100%;
-  height:70px;
+
+.like-delete {
+  width: 100%;
+  height: 70px;
   display: flex;
   justify-content: space-between;
 }
-.like ,.delete{
-  width:30%;
-  height:70px;
+
+.like,
+.delete {
+  width: 30%;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.like-icon{
+.like-icon {
   font-size: 13px;
   color: white;
 }
+
 /* 
 @media (max-width: 768px) {
   
@@ -358,4 +387,3 @@ code {
   height: 50px;
   margin-top: 20px
 }
-

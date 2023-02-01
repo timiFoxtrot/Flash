@@ -32,14 +32,15 @@ const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const db_1 = require("./db");
 const memoryRoutes_1 = __importDefault(require("./routes/memoryRoutes"));
-const path_1 = __importDefault(require("path"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-const dirname = path_1.default.resolve();
-app.use('/images', express_1.default.static(path_1.default.join(dirname, '/images')));
+app.use("/static", express_1.default.static("assets/uploads"));
+app.use("/api", memoryRoutes_1.default);
+
 app.use("/api/memories", memoryRoutes_1.default);
+
 app.use("/api/users", userRoutes_1.default);
 (0, db_1.connectDatabase)(app);
 //# sourceMappingURL=app.js.map
