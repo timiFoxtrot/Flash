@@ -15,7 +15,7 @@ function Memory(props) {
                 setDate(Math.floor(difference / 60) + " hour ago")
             } else if (difference < 60) {
                 console.log(difference + " minutes ago")
-                setDate(difference + " minutes ago")
+                setDate(Math.floor(difference) + " minutes ago")
             }
         }
         handleDate()

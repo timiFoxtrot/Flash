@@ -50,14 +50,12 @@ export const StyledSignUpPage = styled.div`
     border-top-width: 20px;
     }
     .signup-btn{
-         display:inline-block;
          padding:0.35em 1.2em;
          border:0.3em solid #FDC727;
          border-radius: 5px;
          margin:20px 0;
          box-sizing: border-box;
          background-color:black;
-         font-family:'Roboto',sans-serif;
          font-weight:800;
          color: white;
          text-align:center;
@@ -66,16 +64,11 @@ export const StyledSignUpPage = styled.div`
          align-items: center;
          width:100%;
         }
-        .signup-btn:hover{
+
+    .signup-btn:hover{
          color:#272727;
          background-color:#FDC727;
          border:0.3em solid black;
-        }
-        @media all and (max-width:30em){
-         .signup-btn{
-          display:block;
-          margin:0.4em auto;
-         }
     }
 
-`;
+`

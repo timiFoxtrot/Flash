@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
@@ -55,7 +55,7 @@ export default function Login() {
               progress: undefined,
               theme: "light",
             });
-            navigate("/")
+            navigate("/home/public")
           }
           console.log(data, 'userLogin', loggedIn, error)
         })
@@ -121,6 +121,8 @@ export default function Login() {
     </div>
   )
 }
+
+export default Login;
 
 
 

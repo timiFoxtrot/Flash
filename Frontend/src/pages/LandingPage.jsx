@@ -10,27 +10,10 @@ function LandingPage() {
                     <img src={logo} alt="" width="50" />
                     <h2>Flash </h2>
                 </div>
-                <nav className="nav-link">
-                    <a className="nav-link-a" href="/">Service</a>
-                  <a className="nav-link-a" href="/">Service 
-                        </a>
-                    <a className="nav-link-a" href="/">Serveice
-                    </a>
 
-                    <a className="nav-link-a" href="/">Service
-                        <FaAngleDown className="icon" />
-                    </a>
-                    <a className="nav-link-a" href="/">Service
-                        <FaAngleDown className="icon" />
-                    </a>
-                    <a className="nav-link-a" href="/">Service
-                        <FaAngleDown className="icon" />
-                    </a>
-                </nav>
                 <div className="login-signup " >
                     <Link className="but-login" to="/login">Log in</Link>
-                    <a className="butIcon-signup" href="/">Sign Up</a>
-
+                    <Link className="butIcon-signup" to="/signup">Sign Up</Link>
                 </div>
             </header>
 

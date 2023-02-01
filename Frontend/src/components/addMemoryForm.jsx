@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyledCreateMemory } from "../styles/createMemory.styled";
 import axios from "axios";
+import { ThemeConText } from "../contexts/themeContext";
+import { ModalContext } from "../contexts/modalContext";
 
-const CreateMemory = ({ handleCreateModal }) => {
+const CreateMemory = () => {
+    const { modals, setModals } = useContext(ModalContext)
     const [creator, setCreator] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
     const [file, setFile] = useState('')
-    const [loading, setIloading] = useState(false)
+    const [loading, setIloading] = useState(false);
+
 
     const handleFile = (e) => {
         console.log(e.target.files)
         setFile(e.target.files[0])
     }
+
     const handleCreate = async (e) => {
         e.preventDefault();
         setIloading(true)
@@ -28,13 +33,13 @@ const CreateMemory = ({ handleCreateModal }) => {
         await axios.post(URL, formData)
             .then(result => {
                 setIloading(false)
+                setModals({ ...modals, createModal: false })
                 console.log(result)
             })
             .catch(err => {
                 console.log(err)
             })
     }
-
 
     return (
         <StyledCreateMemory>
@@ -89,7 +94,7 @@ const CreateMemory = ({ handleCreateModal }) => {
                         filename="image"
                     />
                 </div>
-                <button disabled={loading}>Create</button>
+                <button>Create</button>
             </form>
         </StyledCreateMemory>
     );

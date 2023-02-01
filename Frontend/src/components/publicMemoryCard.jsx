@@ -4,7 +4,7 @@ import Memory from '../components/memory';
 import HashLoader from "react-spinners/ClipLoader"
 
 function PublicMemoryCard() {
-    const [memories, setMemories] = useState(null);
+    const [memories, setMemories] = useState([]);
     const [loading, setIsloading] = useState(false);
 
     useEffect(() => {

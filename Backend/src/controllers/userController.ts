@@ -7,7 +7,8 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    const newUser = await User.create(req.body);
+    console.log(JSON.parse(req.body.body))
+    const newUser = await User.create(JSON.parse(req.body.body));
     const token = await newUser.genUserAuthToken();
 
     res.status(201).send({ newUser, token });
