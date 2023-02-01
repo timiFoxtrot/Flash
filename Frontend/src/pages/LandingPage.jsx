@@ -11,7 +11,7 @@ function LandingPage() {
                         </div>
                     <nav className="nav-link">
                     <a className="nav-link-a" href="/">Service</a>
-                    <a className="nav-link-a" href="/">Serveice
+                    <a className="nav-link-a" href="/">Service 
                         </a>
                     <a className="nav-link-a" href="/">Service
                     <FaAngleDown  className="icon"/>
