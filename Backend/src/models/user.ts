@@ -1,19 +1,31 @@
-import mongoose from "mongoose";
+import mongoose, { Model, Schema, HydratedDocument, model } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import Memory from "./memory";
 
-interface User {
+interface IUser {
   first_name: string;
   last_name: string;
   user_name: string;
   email: string;
   password: string;
   gender: string;
+  _id: any
 }
 
-const Schema = mongoose.Schema;
+interface IUserMethods {
+  genUserAuthToken(): string;
+}
 
-const userSchema = new Schema({
+interface UserModel extends Model<IUser, {}, IUserMethods> {
+  findUserByCredentials(
+    email: string,
+    password: string
+  ): Promise<HydratedDocument<IUser, IUserMethods>>;
+}
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>({
   first_name: {
     type: String,
     required: true,
@@ -56,20 +68,55 @@ userSchema.pre("save", async function (next) {
 });
 
 //Login credentials validation
-userSchema.statics.findUserByCredentials = async (email, password) => {
-  const user: User = (await User.findOne({ email })) as User;
-  if (!email) {
-    throw new Error("Unable to login");
+userSchema.static(
+  "findUserByCredentials",
+  async function findUserByCredentials(email, password) {
+    const user: any = await User.findOne({ email });
+    if (!email) {
+      throw new Error("Unable to login");
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      throw new Error("Unable to login");
+    }
+
+    return user;
   }
+);
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    throw new Error("Unable to login");
-  }
+// Generte user authentication token
+userSchema.method("genUserAuthToken", async function genUserAuthToken() {
+  const user: any = this;
+  const secret: string = process.env.JWT_SECRET as string;
+  const maxAge: number = 3 * 24 * 60 * 60;
+  const token = jwt.sign(
+    { _id: user._id.toString(), user_name: user.user_name },
+    secret,
+    {
+      expiresIn: maxAge,
+    }
+  );
 
-  return user;
-};
+  await user.save();
 
-const User = mongoose.model("User", userSchema);
+  return token;
+});
+
+userSchema.virtual("myMemories", {
+  ref: "Memory",
+  localField: "_id",
+  foreignField: "user_id",
+});
+
+userSchema.pre("remove", async function (next) {
+  const user: any = this;
+
+  await Memory.deleteMany({ user_id: user._id });
+
+  next();
+});
+
+const User = model<IUser, UserModel>("User", userSchema);
 
 export default User;

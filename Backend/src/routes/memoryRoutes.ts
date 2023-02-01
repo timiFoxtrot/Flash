@@ -1,12 +1,29 @@
 import express from "express";
 import { Request, Response } from "express";
-import { createMemory, deleteMemory, updateMemory } from "../controllers/memoryController";
-const Memory = require("../models/memory");
+
 
 const router = express.Router();
 
-router.post("/memories", createMemory);
-router.patch("/memories/:id", updateMemory)
-router.delete("/memories/:id", deleteMemory)
+
+import {
+  createMemory,
+  deleteMemory,
+  getAllMemories,
+  getMemoryByUser,
+  getOwnMemory,
+  getSingleMemory,
+  updateMemory,
+} from "../controllers/memoryController";
+import { auth } from "../middlewares/auth";
+import { Upload } from "../middlewares/imageUpload";
+
+router.post("/", Upload.single("image"), createMemory);
+router.patch("/:id", auth, updateMemory);
+router.get("/own", auth, getOwnMemory);
+router.get("/", getAllMemories);
+router.get("/:id", auth, getSingleMemory);
+router.get("/user", auth, getMemoryByUser);
+router.delete("/:id", auth, deleteMemory);
+
 
 export default router;
