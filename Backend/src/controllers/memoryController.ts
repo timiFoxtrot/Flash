@@ -2,12 +2,10 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import Memory from "../models/memory";
 import User from "../models/user";
 
-
-
-
 export const createMemory = async (req: Request, res: Response) => {
-  console.log(req.file)
+  console.log(req.file);
   const memory = new Memory({
+    user_id: req._id,
     user_name: req.body.user_name,
     photo: req.file?.filename,
     title: req.body.title,
@@ -18,7 +16,7 @@ export const createMemory = async (req: Request, res: Response) => {
 
   try {
     const newMemory = await memory.save();
-    console.log(newMemory)
+    console.log(newMemory);
     res.status(201).json({
       status: "success",
       data: {
@@ -51,9 +49,9 @@ export const updateMemory = async (
     const memory: any = await Memory.findOne({ _id: req.params.id });
 
     if (!memory) {
-      res.status(404).send()
+      res.status(404).send();
     }
-    
+
     updates.forEach((update) => (memory[update] = req.body[update]));
     await memory.save();
 
@@ -71,32 +69,33 @@ export const updateMemory = async (
   }
 };
 
-
-export const deleteMemory = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteMemory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const memory = await Memory.findByIdAndRemove({ _id: req.params.id });
     if (!memory) {
       res.status(400).json({
-      status: "fail",
-      message: `No memory with id: ${req.params.id} exist`,
-      }) 
+        status: "fail",
+        message: `No memory with id: ${req.params.id} exist`,
+      });
     } else {
       res.status(200).json({
-      status: "success",
-      data: {
-        memory,
+        status: "success",
+        data: {
+          memory,
         },
       });
     }
-    
-
   } catch (err) {
     res.status(400).json({
       status: "fail",
       message: err,
     });
   }
-}
+};
 
 export const getOwnMemory = async (
   req: Request,
@@ -174,7 +173,7 @@ export const getAllMemories = async (
   next: NextFunction
 ) => {
   try {
-    const memories = await Memory.find({});
+    const memories = await Memory.find({}, null, { sort: { createdAt: -1 } });
 
     res.status(200).json({
       status: "success",
@@ -213,5 +212,3 @@ export const getSingleMemory = async (
     });
   }
 };
-
-

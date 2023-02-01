@@ -394,3 +394,14 @@ code {
   height: 50px;
   margin-top: 20px
 }
+
+
+
+/* auth forms */
+form.signup{
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+}

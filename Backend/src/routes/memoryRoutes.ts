@@ -17,7 +17,7 @@ import {
 import { auth } from "../middlewares/auth";
 import { Upload } from "../middlewares/imageUpload";
 
-router.post("/", Upload.single("image"), createMemory);
+router.post("/", auth, Upload.single("image"), createMemory);
 router.patch("/:id", auth, updateMemory);
 router.get("/own", auth, getOwnMemory);
 router.get("/", getAllMemories);
