@@ -2,12 +2,13 @@ import { useState } from "react";
 import { StyledCreateMemory } from "../styles/createMemory.styled";
 import axios from "axios";
 
-const CreateMemory = () => {
+const CreateMemory = ({ handleCreateModal }) => {
     const [creator, setCreator] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
     const [file, setFile] = useState('')
+    const [loading, setIloading] = useState(false)
 
     const handleFile = (e) => {
         console.log(e.target.files)
@@ -15,6 +16,7 @@ const CreateMemory = () => {
     }
     const handleCreate = async (e) => {
         e.preventDefault();
+        setIloading(true)
         const formData = new FormData();
         formData.append("user_name", creator)
         formData.append("title", title)
@@ -23,8 +25,14 @@ const CreateMemory = () => {
         formData.append("image", file)
 
         const URL = "/api/memories";
-        const response = await axios.post(URL, formData)
-        console.log(response.data.data.memory)
+        await axios.post(URL, formData)
+            .then(result => {
+                setIloading(false)
+                console.log(result)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
 
@@ -81,7 +89,7 @@ const CreateMemory = () => {
                         filename="image"
                     />
                 </div>
-                <button>Create</button>
+                <button disabled={loading}>Create</button>
             </form>
         </StyledCreateMemory>
     );

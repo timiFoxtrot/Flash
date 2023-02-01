@@ -36,7 +36,7 @@ const SideBar = () => {
         <StyledSidebar>
             {createModal && <div className="shadow"></div>}
             {searchModal && <SearchBarDestop handleClose={handleCloseSearchModal} />}
-            {createModal && <CreateMemory handleCreate={handleCreateModal} />}
+            {createModal && <CreateMemory handleCreateModal={handleCreateModal} />}
             <div>
                 <div className="logo">Flash</div>
                 <ul className="navLinks">

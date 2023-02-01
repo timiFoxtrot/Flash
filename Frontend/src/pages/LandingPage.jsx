@@ -28,7 +28,7 @@ function LandingPage() {
                     </a>
                 </nav>
                 <div className="login-signup " >
-                    <a className="but-login" href="/">Log in</a>
+                    <Link className="but-login" to="/login">Log in</Link>
                     <a className="butIcon-signup" href="/">Sign Up</a>
 
                 </div>
@@ -40,7 +40,7 @@ function LandingPage() {
                         <h1 className="alw">Flash  Into<br />
                             <span className="shift-provide"></span><span className="provide"> Your</span> <br /> <span className="memo">Memory</span><span className="provide2"></span></h1>
                         <p className="paratext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis eveniet nesciunt, quaerat laudantium beatae et eaque iure itaque autem. Rem sunt molestiae perspiciatis distinctio soluta mollitia magni cum quis eaque?</p>
-                        <Link className="butIcon-signup always-own" to="/home">Start the assignment</Link>
+                        <Link className="butIcon-signup always-own" to="/home/public">Start the assignment</Link>
 
                     </div>
                     <div className="right-side">

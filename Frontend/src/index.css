@@ -299,6 +299,13 @@ code {
   height: auto;
 }
 
+.centerLoader {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .rows1 {
   width: 97%;
   height: auto;
