@@ -1,7 +1,25 @@
+import { useEffect, useState } from "react";
 import { FaThumbsUp, FaComment } from "react-icons/fa";
 
 function Memory(props) {
+    const [date, setDate] = useState('');
 
+    useEffect(() => {
+        const handleDate = () => {
+            const timestamp = props.date;
+            const newDate = new Date(timestamp).getTime();
+            const currentTime = Date.now();
+            const difference = (currentTime - newDate) / 60000;
+            if (difference >= 60) {
+                console.log(Math.floor(difference / 60) + " hour ago")
+                setDate(Math.floor(difference / 60) + " hour ago")
+            } else if (difference < 60) {
+                console.log(difference + " minutes ago")
+                setDate(difference + " minutes ago")
+            }
+        }
+        handleDate()
+    }, [])
     return (
 
         <div className="rows1">
@@ -12,7 +30,7 @@ function Memory(props) {
             }}>
                 <div className="flex">
                     <p className="white"><b>{props.name}</b></p>
-                    <p className="white">1 Minutes ago</p>
+                    <p className="white">{date}</p>
                 </div>
             </div>
             <div className="sectin-div">

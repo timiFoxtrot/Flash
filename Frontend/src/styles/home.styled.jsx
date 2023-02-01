@@ -6,8 +6,8 @@ export const StyledHome = styled.div`
   width: 100vw;
   max-width: 100%;
   display: flex;
-  background-color: ${(props) => props.dark === "dark" ? "#000" : "#fff"};
-  color:${(props) => props.dark === "dark" ? "#fff" : "#000"};
+  background-color: ${(props) => props.dark === "dark" ? "#fff" : "#000"};
+  color:${(props) => props.dark === "dark" ? "#000" : "#fff"};
 
 
   .card-roll{

@@ -72,7 +72,8 @@ userSchema.static(
   "findUserByCredentials",
   async function findUserByCredentials(email, password) {
     const user: any = await User.findOne({ email });
-    if (!email) {
+    console.log(user)
+    if (!user) {
       throw new Error("Unable to login");
     }
 
