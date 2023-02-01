@@ -10,28 +10,43 @@ export const StyledSidebar = styled.div`
     align-items: flex-start;
     justify-content: space-between;
     padding: 0 0 30px 10px;
-    background-color: #000;
-    color: rgba(250,250,250);
     position: relative;
-    border-right: 1px solid #373636;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
-    &:after{
+    .shadow{
         position: fixed;
-        content: " ";
         top: 0;
         right: 0;
         width: 100%;
         background-color: #000;
-        opacity: 0.6;
+        opacity: 0.7;
         height: 100%;
-        z-index: 5;
-        display: none;
+        z-index: 4;
+        color:#fff;
+    }
+
+
+    .home-link{
+        color: ${(props) => props.dark === "dark" ? "#fff" : "#000"};
+    }
+
+    a{
+        text-decoration: none;
+        color: ${(props) => props.dark === "dark" ? "#fff" : "#000"};
     }
 
     .logo{
         margin: 20px 0 40px 0;
         padding: 10px;
         cursor: pointer;
+        color: #f09433; 
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 800;
+        color: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        color: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+        color: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
     }
 
     .navLinks li{
@@ -45,8 +60,9 @@ export const StyledSidebar = styled.div`
     }
 
     .navLinks li:hover{
-      background: #1a1a1a;
-      border-radius: 24px;
+        background-color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#ebe7e7"};
+        color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
+        border-radius: 24px;
     }
 
     .navLinks .link-icon{
@@ -58,13 +74,17 @@ export const StyledSidebar = styled.div`
         cursor: pointer;
         display: flex;
         align-items: center;
+        border-radius: 24px;
        padding: 10px 20px 10px 10px;
        transition: all 0.3s ease;
+         background-color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#ebe7e7"};
+        color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
+
      }
 
      .moreBtn:hover{
-      background: #1a1a1a;
-      border-radius: 24px;
+         background-color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#ebe7e7"};
+         color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
      }
 
     .moreBtn .link-icon{
@@ -74,13 +94,14 @@ export const StyledSidebar = styled.div`
     .more{
         position: absolute;
         bottom: 70px;
-        padding: 10px;
-        display: none;
-        background: #3f3e3e;
+        padding: 10px 15px;
         border-radius: 6px;
-        width: 90%;
-        color: #fff;
+        width: 100%;
         max-width: 100%;
+    }
+
+    .offMore{
+        display: none;
     }
 
     .more li{
@@ -93,6 +114,7 @@ export const StyledSidebar = styled.div`
         margin: 20px 0;
         display: flex;
         justify-content: space-between;
+        padding: 10px;
     }
 
 `

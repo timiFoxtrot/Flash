@@ -1,7 +1,8 @@
-import { Model, Schema, HydratedDocument, model } from "mongoose";
+import mongoose, { Model, Schema, HydratedDocument, model } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import Memory from "./memory";
 
 interface IUser {
   first_name: string;
@@ -10,6 +11,7 @@ interface IUser {
   email: string;
   password: string;
   gender: string;
+  _id: any
 }
 
 interface IUserMethods {
@@ -88,13 +90,31 @@ userSchema.method("genUserAuthToken", async function genUserAuthToken() {
   const user: any = this;
   const secret: string = process.env.JWT_SECRET as string;
   const maxAge: number = 3 * 24 * 60 * 60;
-  const token = jwt.sign({ _id: user._id.toString(), user_name: user.user_name }, secret, {
-    expiresIn: maxAge,
-  });
+  const token = jwt.sign(
+    { _id: user._id.toString(), user_name: user.user_name },
+    secret,
+    {
+      expiresIn: maxAge,
+    }
+  );
 
   await user.save();
 
   return token;
+});
+
+userSchema.virtual("myMemories", {
+  ref: "Memory",
+  localField: "_id",
+  foreignField: "user_id",
+});
+
+userSchema.pre("remove", async function (next) {
+  const user: any = this;
+
+  await Memory.deleteMany({ user_id: user._id });
+
+  next();
 });
 
 const User = model<IUser, UserModel>("User", userSchema);

@@ -24,10 +24,13 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
     }
 
     const decoded: Dec = jwt.verify(bearerToken, secret) as Dec
+
+    if (!decoded) {
+      res.sendStatus(403)
+    }
     
     req._id = decoded._id 
     req.user_name = decoded.user_name
-    console.log(req._id, req.user_name);
     next()
   } else {
     res.sendStatus(403)

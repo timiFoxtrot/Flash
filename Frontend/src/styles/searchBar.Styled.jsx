@@ -12,8 +12,8 @@ export const StyledSearchBarDestop = styled.div`
   z-index: 10;
   background-color: #000;
   padding: 20px;
-  display: none;
 
+  
   .top-flex{
     display: flex;
     align-items: center;
@@ -59,6 +59,10 @@ export const StyledSearchBarDestop = styled.div`
    .display-box span{
     border: 1px solid red;
     margin-right: 8px;
+  }
+
+  .fa-close{
+    cursor: pointer;
   }
 
   .display-box li div{
