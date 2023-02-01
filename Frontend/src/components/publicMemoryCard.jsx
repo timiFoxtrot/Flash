@@ -1,35 +1,36 @@
-
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import Memory from '../components/memory';
-import pic1 from "../images/stories/pic1.jpeg";
-import pic2 from "../images/stories/pic2.jpeg";
-import pic3 from "../images/stories/pic3.jpeg";
-import pic4 from "../images/stories/pic4.jpeg";
-import pic5 from "../images/stories/pic5.jpeg";
 
-function PublicMemoryCard(){
-        const listOfMemory = [
-            {image:pic1,name:"Jenifer",message:"JENNY"},
-            {image:pic2,name:"sofila",message:"Jenifer Jenifer"},
-            {image:pic3,name:"elena",message:"Jenifer Jenifer"},
-            {image:pic4,name:"sam",message:"Jenifer Jenifer"},
-            {image:pic5,name:"Jenifer",message:"Jenifer Jenifer"},
-            {image:pic1,name:"sofila",message:"Jenifer Jenifer Jenifer"},
-            {image:pic2,name:"elena",message:"Jenifer"},
-            {image:pic3,name:"sam",message:"Jenifer Jenifer Jenifer"},
-            {image:pic4,name:"Jenifer",message:"Jenifer Jenifer Jenifer Jenifer"},
-            {image:pic5,name:"sam",message:"Jenifer"},
-          ]
-    return(
+function PublicMemoryCard() {
+    const [memories, setMemories] = useState(null);
+
+    useEffect(() => {
+        const getMemories = async () => {
+            await axios.get("/api/memories")
+                .then(results => setMemories(results.data.data.memories))
+                .catch(err => console.log(err))
+        }
+        getMemories()
+    }, [])
+    return (
         <div className="public">
-
             <div className="public__header">
-            {
-            listOfMemory.map((values, index) => (
-        <Memory key={index} image={values.image} names={values.name} messages={values.message}>{values}</Memory>
-      ))
-      }
+                {
+                    memories && memories.map((post) => (
+                        <Memory
+                            key={post._id}
+                            image={post.photo}
+                            name={post.user_name}
+                            title={post.title}
+                            location={post.location}
+                            description={post.description}
+                            date={post.createdAt}
+                        />
+                    ))
+                }
 
-                </div>
+            </div>
         </div>
     )
 

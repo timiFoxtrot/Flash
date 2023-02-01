@@ -2,13 +2,14 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import Memory from "../models/memory";
 import User from "../models/user";
 
-export const createMemory = async (req: Request, res: Response) => {
-  const filename = req.file !== null ? req.file?.originalname : null;
 
+
+
+export const createMemory = async (req: Request, res: Response) => {
+  console.log(req.file)
   const memory = new Memory({
-    user_name: req.user_name,
-    user_id: req._id,
-    photo: req.file,
+    user_name: req.body.user_name,
+    photo: req.file?.filename,
     title: req.body.title,
     description: req.body.description,
     location: req.body.location,
@@ -17,6 +18,7 @@ export const createMemory = async (req: Request, res: Response) => {
 
   try {
     const newMemory = await memory.save();
+    console.log(newMemory)
     res.status(201).json({
       status: "success",
       data: {

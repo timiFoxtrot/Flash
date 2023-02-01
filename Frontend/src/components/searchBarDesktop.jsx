@@ -1,12 +1,12 @@
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { StyledSearchBarDestop } from "../styles/searchBar.Styled";
 
-const SearchBarDestop = () => {
+const SearchBarDestop = ({ handleClose }) => {
     return (
         <StyledSearchBarDestop>
             <div className="top-flex">
                 <h3>Search</h3>
-                <FaTimes />
+                <FaTimes className="fa-close" onClick={handleClose} />
             </div>
             <div className="search-box">
                 <FaSearch className="smallSearchIcon" />
