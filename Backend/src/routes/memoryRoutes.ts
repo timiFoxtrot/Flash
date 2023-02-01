@@ -1,5 +1,10 @@
 import express from "express";
 import { Request, Response } from "express";
+
+
+const router = express.Router();
+
+
 import {
   createMemory,
   deleteMemory,
@@ -11,7 +16,6 @@ import {
 } from "../controllers/memoryController";
 import { auth } from "../middlewares/auth";
 import { Upload } from "../middlewares/imageUpload";
-const router = express.Router();
 
 router.post("/", Upload.single("image"), createMemory);
 router.patch("/:id", auth, updateMemory);
@@ -20,5 +24,6 @@ router.get("/", getAllMemories);
 router.get("/:id", auth, getSingleMemory);
 router.get("/user", auth, getMemoryByUser);
 router.delete("/:id", auth, deleteMemory);
+
 
 export default router;
