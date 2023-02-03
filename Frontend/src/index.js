@@ -4,12 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom"
+import { MemoryContextProvider } from './contexts/memoryContext';
+import { UserContextProvider } from './contexts/userContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <UserContextProvider>
+      <MemoryContextProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </MemoryContextProvider>
+    </UserContextProvider>
   </BrowserRouter>
 );
 

@@ -26,20 +26,11 @@ export const StyledSidebar = styled.div`
     }
 
 
-    .home-link{
-        color: ${(props) => props.dark === "dark" ? "#fff" : "#000"};
-    }
-
-    a{
-        text-decoration: none;
-        color: ${(props) => props.dark === "dark" ? "#fff" : "#000"};
-    }
-
     .logo{
         margin: 20px 0 40px 0;
         padding: 10px;
         cursor: pointer;
-        color: #f09433; 
+        color: #cc2366; 
         font-size: 24px;
         font-style: italic;
         font-weight: 800;
@@ -75,17 +66,11 @@ export const StyledSidebar = styled.div`
         display: flex;
         align-items: center;
         border-radius: 24px;
-       padding: 10px 20px 10px 10px;
-       transition: all 0.3s ease;
-         background-color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#ebe7e7"};
-        color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
-
+        padding: 10px 20px 10px 10px;
+        transition: all 0.3s ease;
      }
 
-     .moreBtn:hover{
-         background-color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#ebe7e7"};
-         color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
-     }
+   
 
     .moreBtn .link-icon{
         margin: 0 10px 0 0;
@@ -98,6 +83,7 @@ export const StyledSidebar = styled.div`
         border-radius: 6px;
         width: 100%;
         max-width: 100%;
+        background-color: #eee;
     }
 
     .offMore{
@@ -115,6 +101,7 @@ export const StyledSidebar = styled.div`
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
     }
 
 `

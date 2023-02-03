@@ -47,18 +47,19 @@ export const loginUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.body.body)
+  // console.log(req.body.body)
   try {
     const { email, password } = JSON.parse(req.body.body);
 
     const user = await User.findUserByCredentials(email, password);
     console.log(email, password)
     const token = await user.genUserAuthToken();
-
+    console.log(token)
     res.send({ user, token });
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error)
     res.status(400).json({
-      messageFromDB: error,
+      message: error.message,
     });
   }
 };
@@ -68,7 +69,7 @@ export const deleteUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req._id;
+  const id = req.user;
   try {
     const user = await User.findById(id);
 

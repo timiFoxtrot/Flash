@@ -10,13 +10,14 @@ const HomePage = () => {
     const [theme, setTheme] = useState(true);
     const [modals, setModals] = useState({
         createModal: false,
+        searchModal: false
     })
 
 
     return (
         <ModalContext.Provider value={{ modals, setModals }}>
             <ThemeConText.Provider value={{ theme, setTheme }}>
-                <StyledHome dark={theme === true ? "dark" : "light"}>
+                <StyledHome dark={theme === true ? "light" : "dark"}>
                     <SideBar dark={theme === true ? "dark" : "light"} />
                     <Outlet />
                 </StyledHome>

@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route exact path="/" element={<LandingPage />} />
         <Route path="/home" element={<HomePage />}>
           <Route path="/home/public" element={<PublicMemoriesPage />} />
           <Route path="/home/ownMemory" element={<OwnMemoryPage />} />

@@ -1,24 +1,38 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Memory from '../components/memory';
 import HashLoader from "react-spinners/ClipLoader"
+import { MemoryContext } from '../contexts/memoryContext';
+import { UserContext } from '../contexts/userContext';
 
 function PublicMemoryCard() {
-    const [memories, setMemories] = useState([]);
+    const { state, dispatch } = useContext(MemoryContext)
+    const { userState } = useContext(UserContext)
     const [loading, setIsloading] = useState(false);
 
     useEffect(() => {
         const getMemories = async () => {
             setIsloading(true)
-            await axios.get("/api/memories")
+            await axios.get("/api/memories", {
+                headers: {
+                    authorization: `Bearer ${userState.user.token}`,
+                }
+            })
                 .then(results => {
+                    console.log(results)
                     setIsloading(false)
-                    setMemories(results.data.data.memories)
+                    dispatch({ type: "GET_ALL_MEMORIES", payload: results.data.data.memories })
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log({ error: err.message })
+                })
         }
-        getMemories()
-    }, [])
+        if (userState.user) {
+            console.log("we have user now")
+            console.log(userState.user)
+            getMemories()
+        }
+    }, [dispatch, userState.user])
     return (
         <div >
             {
@@ -27,16 +41,17 @@ function PublicMemoryCard() {
                     < div className="public" >
                         <div className="public__header">
                             {
-                                memories && memories.map((post) => (
-                                    <Memory
-                                        key={post._id}
-                                        image={post.photo}
-                                        name={post.user_name}
-                                        title={post.title}
-                                        location={post.location}
-                                        description={post.description}
-                                        date={post.createdAt}
-                                    />
+                                state.memories && state.memories.map((post) => (
+                                    <div key={post._id}>
+                                        <Memory
+                                            image={post.photo}
+                                            name={post.user_name}
+                                            title={post.title}
+                                            location={post.location}
+                                            description={post.description}
+                                            date={post.createdAt}
+                                        />
+                                    </div>
                                 ))
                             }
 
