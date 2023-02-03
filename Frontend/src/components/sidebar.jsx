@@ -1,27 +1,29 @@
 import { useState, useContext } from "react";
 import { FaBars, FaBell, FaCog, FaHome, FaMoon, FaPlus, FaSearch, FaUser } from "react-icons/fa"
 import { StyledSidebar } from "../styles/sidebar.styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateMemory from "./addMemoryForm";
 import SearchBarDestop from "./searchBarDesktop";
 import { ThemeConText } from "../contexts/themeContext";
 import { ModalContext } from "../contexts/modalContext";
+import { UserContext } from "../contexts/userContext";
 
 const SideBar = () => {
+    const { userDispatch } = useContext(UserContext)
     const { modals, setModals } = useContext(ModalContext)
     const { theme, setTheme } = useContext(ThemeConText)
-    const [searchModal, setSearchModal] = useState(false)
     const [more, setMore] = useState(false)
+    const navigate = useNavigate()
 
     const handleCreateModal = () => {
         setModals({ ...modals, createModal: true })
     }
     const handleSearchModal = () => {
-        setSearchModal(!searchModal)
+        setModals({ ...modals, searchModal: true })
     }
 
     const handleCloseSearchModal = () => {
-        setSearchModal(false)
+        setModals({ ...modals, searchModal: false })
     }
 
     const handleMore = () => {
@@ -33,20 +35,28 @@ const SideBar = () => {
         setTheme(!theme)
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("user")
+        userDispatch({ type: "LOGOUT" })
+        navigate("/")
+    }
+
     return (
         <StyledSidebar>
             {modals.createModal && <div onClick={() => setModals({ ...modals, createModal: false })} className="shadow"></div>}
-            {searchModal && <SearchBarDestop handleClose={handleCloseSearchModal} />}
+            {modals.searchModal && <div onClick={() => setModals({ ...modals, searchModal: false })} className="shadow"></div>}
+            {modals.searchModal && <SearchBarDestop handleClose={handleCloseSearchModal} />}
             {modals.createModal && <CreateMemory />}
             <div>
-                <div className="logo">Flash</div>
+                <Link className="logo" to="/home/public">Flash</Link>
                 <ul className="navLinks">
-                    <li>
-                        <Link className="home-link" to="/home/public">
+                    <Link className="home-link" to="/home/public">
+                        <li>
                             <FaHome className="link-icon" />
                             <span>Home</span>
-                        </Link>
-                    </li>
+                        </li>
+                    </Link>
+
                     <li onClick={handleSearchModal}>
                         <FaSearch className="link-icon" />
                         <span>Search</span>
@@ -59,12 +69,13 @@ const SideBar = () => {
                         <FaPlus className="link-icon" />
                         <span >Create</span>
                     </li>
-                    <li>
-                        <Link to="/home/ownMemory">
+                    <Link to="/home/ownMemory">
+                        <li>
                             <FaUser className="link-icon" />
                             <span>Profile</span>
-                        </Link>
-                    </li>
+                        </li>
+                    </Link>
+
                 </ul>
             </div>
             <ul className={more ? "more" : "offMore"}>
@@ -76,7 +87,7 @@ const SideBar = () => {
                     <span>Switch Appearance</span>
                     <FaMoon className="setting-icon" />
                 </li>
-                <li>
+                <li onClick={handleLogout}>
                     <span>Log out</span>
                 </li>
             </ul>

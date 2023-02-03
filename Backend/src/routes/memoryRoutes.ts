@@ -1,10 +1,5 @@
 import express from "express";
 import { Request, Response } from "express";
-
-
-const router = express.Router();
-
-
 import {
   createMemory,
   deleteMemory,
@@ -14,16 +9,21 @@ import {
   getSingleMemory,
   updateMemory,
 } from "../controllers/memoryController";
-import { auth } from "../middlewares/auth";
+import { authMiddleware } from "../middlewares/auth";
 import { Upload } from "../middlewares/imageUpload";
 
-router.post("/", Upload.single("image"), createMemory);
-router.patch("/:id", auth, updateMemory);
-router.get("/own", auth, getOwnMemory);
+const router = express.Router();
+
+router.use(authMiddleware)
+
+
 router.get("/", getAllMemories);
-router.get("/:id", auth, getSingleMemory);
-router.get("/user", auth, getMemoryByUser);
-router.delete("/:id", auth, deleteMemory);
+router.post("/", Upload.single("image"), createMemory);
+router.patch("/:id", updateMemory);
+router.get("/own", getOwnMemory);
+router.get("/:id", getSingleMemory);
+router.get("/user", getMemoryByUser);
+router.delete("/:id", deleteMemory);
 
 
 export default router;

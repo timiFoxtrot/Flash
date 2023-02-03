@@ -4,9 +4,9 @@ import User from "../models/user";
 
 export const createMemory = async (req: Request, res: Response) => {
   console.log(req.file);
-  console.log('USERID>>', req._id);
+  console.log('USERID>>', req.user);
   const memory = new Memory({
-    user_id: req._id,
+    user_id: req.user,
     user_name: req.body.user_name,
     photo: req.file?.filename,
     title: req.body.title,
@@ -24,10 +24,10 @@ export const createMemory = async (req: Request, res: Response) => {
         memory: newMemory,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(400).json({
       status: "fail",
-      message: error,
+      message: error.message,
     });
   }
 };
@@ -103,8 +103,8 @@ export const getOwnMemory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req._id;
-  const userName = req.user_name;
+  const id = req.user;
+  // const userName = req.user;
   try {
     const ownMemory = await Memory.find({ user_id: id });
 
@@ -173,6 +173,7 @@ export const getAllMemories = async (
   res: Response,
   next: NextFunction
 ) => {
+  // console.log(req.user)
   try {
     const memories = await Memory.find({}, null, { sort: { createdAt: -1 } });
 

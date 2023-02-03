@@ -74,12 +74,12 @@ userSchema.static(
     const user: any = await User.findOne({ email });
     console.log(user)
     if (!user) {
-      throw new Error("Unable to login");
+      throw new Error("Invalid Email");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new Error("Unable to login");
+      throw new Error("Incorrect Password");
     }
 
     return user;

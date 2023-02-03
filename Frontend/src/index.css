@@ -247,6 +247,7 @@ code {
   height: 80px;
   border-radius: 50%;
   border: 2px solid purple;
+  cursor: pointer;
 }
 
 .arrangeBox {

@@ -19,7 +19,7 @@ function Memory(props) {
             }
         }
         handleDate()
-    }, [])
+    }, [props.date])
     return (
 
         <div className="rows1">

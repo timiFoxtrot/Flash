@@ -10,7 +10,8 @@ export const StyledSearchBarDestop = styled.div`
   max-width: 100%;
   height: 100%;
   z-index: 10;
-  background-color: #000;
+  background-color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#ebe7e7"};
+  color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
   padding: 20px;
 
   

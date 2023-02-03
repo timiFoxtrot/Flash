@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { StyledCreateMemory } from "../styles/createMemory.styled";
 import axios from "axios";
-import { ThemeConText } from "../contexts/themeContext";
 import { ModalContext } from "../contexts/modalContext";
+import { UserContext } from "../contexts/userContext";
 
 const CreateMemory = () => {
+    const { userState } = useContext(UserContext)
     const { modals, setModals } = useContext(ModalContext)
     const [creator, setCreator] = useState('')
     const [title, setTitle] = useState('')
@@ -12,6 +13,7 @@ const CreateMemory = () => {
     const [location, setLocation] = useState('')
     const [file, setFile] = useState('')
     const [loading, setIloading] = useState(false);
+    const [refresh, setFresh] = useState(false)
 
 
     const handleFile = (e) => {
@@ -30,11 +32,15 @@ const CreateMemory = () => {
         formData.append("image", file)
 
         const URL = "/api/memories";
-        await axios.post(URL, formData)
+        await axios.post(URL, formData, {
+            headers: {
+                authorization: `Bearer ${userState.user.token}`
+            }
+        })
             .then(result => {
                 setIloading(false)
                 setModals({ ...modals, createModal: false })
-                console.log(result)
+                setFresh(true);
             })
             .catch(err => {
                 console.log(err)

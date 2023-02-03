@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { StyledSignUpPage } from "../styles/signUpPage.styled";
 import axios from "axios"
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/userContext';
+
 const Signup = () => {
+  const navigate = useNavigate()
+  const { userDispatch } = useContext(UserContext)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -26,7 +33,10 @@ const Signup = () => {
           gender: gender
         }),
       })
-
+      const user = { username: res.data.newUser.user_name, token: res.data.token }
+      localStorage.setItem("user", JSON.stringify(user))
+      userDispatch({ type: "SIGNUP", payload: user })
+      navigate("/home/public")
       console.log(res)
     } catch (error) {
       console.log(error)

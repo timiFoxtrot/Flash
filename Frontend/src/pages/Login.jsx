@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useState, useContext } from "react";
+import { Link, useNavigate } from 'react-router-dom'
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-
+import { UserContext } from "../contexts/userContext"
 
 function Login() {
+  const { userDispatch } = useContext(UserContext)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
@@ -30,7 +32,6 @@ function Login() {
         })
       })
         .then(data => {
-          console.log(data)
           if (data.error !== '') {
             setError(true)
             toast.error(data.error, {
@@ -44,6 +45,7 @@ function Login() {
               theme: "light",
             });
           } if (data.error === undefined) {
+            console.log({ user: data.data.user.user_name, token: data.data.token })
             setLoggedIn(true)
             toast.success(`You are logged in ${data.data.user_name}`, {
               position: "top-center",
@@ -55,12 +57,15 @@ function Login() {
               progress: undefined,
               theme: "light",
             });
+            const user = { username: data.data.user.user_name, token: data.data.token }
+            localStorage.setItem("user", JSON.stringify(user))
+            userDispatch({ type: "LOGIN", payload: user })
             navigate("/home/public")
           }
           console.log(data, 'userLogin', loggedIn, error)
         })
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.message)
     }
 
     setEmail('')
@@ -105,9 +110,9 @@ function Login() {
                     <div className="mt-3">
                       <p className="mb-0  text-center">
                         Don't have an account??{" "}
-                        <a href="{''}" className="text-primary fw-bold">
+                        <Link to="/signup" className="text-primary fw-bold">
                           Register
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </div>
