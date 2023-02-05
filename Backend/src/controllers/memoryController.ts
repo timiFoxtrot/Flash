@@ -37,7 +37,7 @@ export const updateMemory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const allowedUpdates = ["description", "title", "likes"];
+  const allowedUpdates = ["description", "title"];
   const updates = Object.keys(req.body);
   const isValidUpdates = updates.every((update) =>
     allowedUpdates.includes(update)
@@ -75,6 +75,7 @@ export const deleteMemory = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.params.id)
   try {
     const memory = await Memory.findByIdAndRemove({ _id: req.params.id });
     if (!memory) {
@@ -103,13 +104,15 @@ export const getOwnMemory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req.user;
-  // const userName = req.user;
   try {
-    const ownMemory = await Memory.find({ user_id: id });
+    const user = await User.findOne({ user_name: req.params.username })
+    if (!user) {
+      return res.status(404).json('User not found');
+    }
 
+    const ownMemory = await Memory.find({ user_id: user.user_name });
     if (!ownMemory) {
-      res.status(404).json({
+      res.status(204).json({
         status: "success",
         message: "You have not created any memory",
       });
@@ -198,8 +201,12 @@ export const getSingleMemory = async (
   next: NextFunction
 ) => {
   const id = req.params.id;
+  console.log(id)
   try {
     const memory = await Memory.findById(id);
+    if (!memory) {
+      res.status(404).json("Memory no found");
+    }
 
     res.status(200).json({
       status: "success",
@@ -207,6 +214,7 @@ export const getSingleMemory = async (
         memory,
       },
     });
+    next()
   } catch (error) {
     res.status(404).json({
       status: "fail",

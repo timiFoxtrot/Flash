@@ -1,13 +1,16 @@
-function  Box(props){
+import pic1 from "../images/stories/avatar-female.png";
+// import pic2 from "../images/stories/avatar-male.png";
+
+function Box({ name }) {
     return (
         <div className="arrangeBox">
-             <div className="box" >
-            <img src={props.image}  alt=""  />
+            <div className="box" >
+                <img src={pic1} alt="..." />
             </div>
-            <p>{props.names}</p>
+            <p>{name}</p>
         </div>
-       
-        
+
+
 
     )
 }

@@ -1,10 +1,8 @@
-import { Actions } from "./actions";
 
-const OwnMemoryImageCard = () => {
+const OwnMemoryImageCard = ({ image }) => {
     return (
         <div className="ownCardImage">
-            <img src="ass" alt="ff" />
-            <Actions />
+            <img src={`http://localhost:4000/static/${image}`} alt="..." />
         </div>
     );
 }

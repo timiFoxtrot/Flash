@@ -28,7 +28,7 @@ function LandingPage() {
                 </div>
                 {
                     <>
-                        {userState.user ? <div>Welcome | {userState.user.username}</div> :
+                        {userState.user ? <div>Welcome | <h3>{userState.user.username}</h3></div> :
                             <div className="login-signup " >
                                 <Link className="but-login" to="/login">Log in</Link>
                                 <Link className="butIcon-signup" to="/signup">Sign Up</Link>
@@ -43,8 +43,10 @@ function LandingPage() {
                     <div className="left-side">
                         <h1 className="alw">Flash  Into<br />
                             <span className="shift-provide"></span><span className="provide"> Your</span> <br /> <span className="memo">Memory</span><span className="provide2"></span></h1>
-                        <p className="paratext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis eveniet nesciunt, quaerat laudantium beatae et eaque iure itaque autem. Rem sunt molestiae perspiciatis distinctio soluta mollitia magni cum quis eaque?</p>
-                        <button className="butIcon-signup always-own" onClick={handleAuth}>View Memories</button>
+                        <h3 className="paratext">
+                            Easily keep track of your shared <br />experiences and reminisce on them together.
+                        </h3>
+                        <button className="butIcon-signup always-own" onClick={handleAuth}>Get Started</button>
                     </div>
                     <div className="right-side">
                         <img src={woman} alt="" width="450" height="500px" />

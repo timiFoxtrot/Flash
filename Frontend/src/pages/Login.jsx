@@ -45,7 +45,6 @@ function Login() {
               theme: "light",
             });
           } if (data.error === undefined) {
-            console.log({ user: data.data.user.user_name, token: data.data.token })
             setLoggedIn(true)
             toast.success(`You are logged in ${data.data.user_name}`, {
               position: "top-center",

@@ -25,14 +25,14 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   const token = authorization.split(' ')[1];
 
   try {
-    const { _id } = jwt.verify(token, secret) as { _id: string, username: string };
-    const user = await User.findOne({ _id }).select("_id");
+    const { user_name } = jwt.verify(token, secret) as { user_name: string, _id: string };
+    const user = await User.findOne({ user_name }).select("user_name -_id");
 
     if (!user) {
       return res.status(400).json({ message: 'Invalid Token' });
     }
 
-    req.user = user._id;
+    req.user = user.user_name;
     next();
   } catch (error: any) {
     res.status(401).json({ message: error.message });

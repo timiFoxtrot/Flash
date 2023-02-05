@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar"
 import PublicMemoryCard from "../components/publicMemoryCard"
 const PublicMemoriesPage = () => {
     return (
         <div className="card-roll">
-            <Navbar />
+            <div className="headline">Memories</div>
+            {/* <Navbar /> */}
             <PublicMemoryCard />
         </div>
     );

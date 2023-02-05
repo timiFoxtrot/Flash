@@ -14,16 +14,17 @@ import { Upload } from "../middlewares/imageUpload";
 
 const router = express.Router();
 
-router.use(authMiddleware)
+// router.use(authMiddleware)
 
 
-router.get("/", getAllMemories);
-router.post("/", Upload.single("image"), createMemory);
-router.patch("/:id", updateMemory);
-router.get("/own", getOwnMemory);
-router.get("/:id", getSingleMemory);
-router.get("/user", getMemoryByUser);
-router.delete("/:id", deleteMemory);
+router.get("/", authMiddleware, getAllMemories);
+router.get("/:id", authMiddleware, getSingleMemory);
+router.get("/user/:username", authMiddleware, getOwnMemory);
+router.post("/", authMiddleware, Upload, createMemory);
+router.patch("/:id", authMiddleware, updateMemory);
+router.delete("/:id", authMiddleware, deleteMemory);
+
+
 
 
 export default router;

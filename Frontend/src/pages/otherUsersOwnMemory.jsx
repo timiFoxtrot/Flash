@@ -5,18 +5,17 @@ import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { UserContext } from "../contexts/userContext";
 import HashLoader from "react-spinners/ClipLoader"
-import pic from "../images/stories/avatar-male.png"
 
-const OwnMemoryPage = () => {
+const OtherUsersOwnMemory = () => {
     const { userState } = useContext(UserContext)
     const [ownState, setOwnSate] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorText, setErrorText] = useState("You have not created any memories")
-    const { username } = useParams()
+    const [errorText, setErrorText] = useState("No memories created by user")
+    const { user } = useParams()
     const fetchData = useCallback(async () => {
         setIsLoading(true)
         try {
-            const res = await axios.get(`/api/memories/user/${username}`, {
+            const res = await axios.get(`/api/memories/user/${user}`, {
                 headers: {
                     authorization: `Bearer ${userState.user?.token}`
                 }
@@ -34,7 +33,7 @@ const OwnMemoryPage = () => {
         } catch (err) {
             console.log(err)
         }
-    }, [userState, username]);
+    }, [userState]);
 
     useEffect(() => {
         fetchData()
@@ -43,12 +42,10 @@ const OwnMemoryPage = () => {
         <StyledOwnMemoryPage>
             <div className="container">
                 <header>
-                    <div className="img">
-                        <img src={pic} alt="..." />
-                    </div>
+                    <div className="img"></div>
                     <div>
                         <div className="flex2">
-                            <h3>{username}</h3>
+                            <h3>{user}</h3>
                         </div>
                         {ownState && <div>{ownState.length} posts</div>}
                     </div>
@@ -57,7 +54,7 @@ const OwnMemoryPage = () => {
                 <section className="grid">
                     {ownState && ownState.map(mem => {
                         return (
-                            <Link className="card" key={mem._id} to={`/home/singleMemoryPage/${mem._id}`}>
+                            <Link className="card" key={mem._id} to={`/home/public/singleMemory/${mem?._id}`}>
                                 <OwnMemoryImageCard image={mem.photo} />
                             </Link>
                         )
@@ -69,4 +66,4 @@ const OwnMemoryPage = () => {
     );
 }
 
-export default OwnMemoryPage;
+export default OtherUsersOwnMemory;
