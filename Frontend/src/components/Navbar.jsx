@@ -1,33 +1,36 @@
-import Box from "./box";
-import pic1 from "../images/stories/pic1.jpeg";
-import pic2 from "../images/stories/pic2.jpeg";
-import pic3 from "../images/stories/pic3.jpeg";
-import pic4 from "../images/stories/pic4.jpeg";
-import pic5 from "../images/stories/pic5.jpeg";
 import { Link } from "react-router-dom"
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import Box from "./box";
 
 function Navbar() {
-    const listOfQuestions = [
-        { image: pic1, name: "Jenifer" },
-        { image: pic2, name: "sofila" },
-        { image: pic3, name: "elena" },
-        { image: pic4, name: "sam" },
-        { image: pic5, name: "Jenifer" },
-        { image: pic1, name: "sofila" },
-        { image: pic2, name: "elena" },
-        { image: pic3, name: "sam" },
-        { image: pic4, name: "Jenifer" },
-        { image: pic5, name: "sam" },
-    ]
+    const [users, setUsers] = useState(null)
+    const fetchData = useCallback(async () => {
+        try {
+            const res = await axios.get("/api/users")
+            if (res) {
+                console.log(res)
+                setUsers(res.data.data.users)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }, [])
+
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
     return (
         <div className="navbar">
             <div className="app-header">
             </div>
             <div className="nave-bar-row">
                 <div className="nave-bar-container">
-                    {
-                        listOfQuestions.map((values, index) => (
-                            <Link key={index} to="/home/ownMemory"><Box image={values.image} names={values.name}>{values}</Box></Link>
+                    {users &&
+                        users.map((user) => (
+                            <Link key={user._id} to={`/home/ownMemory/user/${user?.user_name || "backup"}`}>
+                                <Box name={user?.first_name || "backup"} />
+                            </Link>
                         ))}
                 </div>
             </div>

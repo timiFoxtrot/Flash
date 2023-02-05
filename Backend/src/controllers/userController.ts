@@ -42,6 +42,25 @@ export const getAllUsers = async (
   }
 };
 
+export const getSingleUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = await User.findOne({ user_name: req.params.user });
+
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    res.status(200).json({
+      status: "success",
+      user: user
+    });
+  } catch (error) {
+    res.status(500).json({ error: "No user found" });
+  }
+};
+
 export const loginUser = async (
   req: Request,
   res: Response,

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import Memory from '../components/memory';
 import HashLoader from "react-spinners/ClipLoader"
 import { MemoryContext } from '../contexts/memoryContext';
@@ -10,29 +10,25 @@ function PublicMemoryCard() {
     const { userState } = useContext(UserContext)
     const [loading, setIsloading] = useState(false);
 
-    useEffect(() => {
-        const getMemories = async () => {
-            setIsloading(true)
-            await axios.get("/api/memories", {
-                headers: {
-                    authorization: `Bearer ${userState.user.token}`,
-                }
+    const fetchData = useCallback(async () => {
+        setIsloading(true)
+        await axios.get("/api/memories", {
+            headers: {
+                authorization: `Bearer ${userState.user?.token || "backup"}`,
+            }
+        })
+            .then(results => {
+                setIsloading(false)
+                dispatch({ type: "GET_ALL_MEMORIES", payload: results.data.data.memories })
             })
-                .then(results => {
-                    console.log(results)
-                    setIsloading(false)
-                    dispatch({ type: "GET_ALL_MEMORIES", payload: results.data.data.memories })
-                })
-                .catch(err => {
-                    console.log({ error: err.message })
-                })
-        }
-        if (userState.user) {
-            console.log("we have user now")
-            console.log(userState.user)
-            getMemories()
-        }
-    }, [dispatch, userState.user])
+            .catch(err => {
+                console.log({ error: err.message })
+            })
+    }, [userState, dispatch]);
+
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
     return (
         <div >
             {

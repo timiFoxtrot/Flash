@@ -58,8 +58,12 @@ export const StyledSearchBarDestop = styled.div`
   }
 
    .display-box span{
-    border: 1px solid red;
+    border: 1px solid #0fa89b;
+    background-color: #0fa89b;
     margin-right: 8px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
   }
 
   .fa-close{
@@ -75,6 +79,10 @@ export const StyledSearchBarDestop = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .search-link{
+    cursor: pointer;
   }
 
 

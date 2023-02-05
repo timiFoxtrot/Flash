@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FaBars, FaBell, FaCog, FaHome, FaMoon, FaPlus, FaSearch, FaUser } from "react-icons/fa"
 import { StyledSidebar } from "../styles/sidebar.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { ModalContext } from "../contexts/modalContext";
 import { UserContext } from "../contexts/userContext";
 
 const SideBar = () => {
-    const { userDispatch } = useContext(UserContext)
+    const { userState, userDispatch } = useContext(UserContext)
     const { modals, setModals } = useContext(ModalContext)
     const { theme, setTheme } = useContext(ThemeConText)
     const [more, setMore] = useState(false)
@@ -31,7 +31,6 @@ const SideBar = () => {
     }
 
     const handleTheme = () => {
-        console.log(theme)
         setTheme(!theme)
     }
 
@@ -40,6 +39,7 @@ const SideBar = () => {
         userDispatch({ type: "LOGOUT" })
         navigate("/")
     }
+
 
     return (
         <StyledSidebar>
@@ -61,20 +61,20 @@ const SideBar = () => {
                         <FaSearch className="link-icon" />
                         <span>Search</span>
                     </li>
-                    <li>
+                    {/* <li>
                         <FaBell className="link-icon" />
                         <span>Notifications</span>
-                    </li>
+                    </li> */}
                     <li onClick={handleCreateModal}>
                         <FaPlus className="link-icon" />
                         <span >Create</span>
                     </li>
-                    <Link to="/home/ownMemory">
+                    {userState ? <Link to={`/home/ownMemory/user/${userState.user?.username || "backup"}`}>
                         <li>
                             <FaUser className="link-icon" />
                             <span>Profile</span>
                         </li>
-                    </Link>
+                    </Link> : <span></span>}
 
                 </ul>
             </div>

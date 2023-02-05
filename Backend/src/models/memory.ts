@@ -36,8 +36,7 @@ const memorySchema = new Schema<IMemory>(
       required: true,
     },
     user_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
     },
     likes: { type: Number },
     comments: [{ user: { type: String } }],

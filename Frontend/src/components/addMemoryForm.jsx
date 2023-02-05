@@ -3,9 +3,11 @@ import { StyledCreateMemory } from "../styles/createMemory.styled";
 import axios from "axios";
 import { ModalContext } from "../contexts/modalContext";
 import { UserContext } from "../contexts/userContext";
+import { MemoryContext } from "../contexts/memoryContext";
 
 const CreateMemory = () => {
     const { userState } = useContext(UserContext)
+    const { dispatch } = useContext(MemoryContext)
     const { modals, setModals } = useContext(ModalContext)
     const [creator, setCreator] = useState('')
     const [title, setTitle] = useState('')
@@ -17,7 +19,6 @@ const CreateMemory = () => {
 
 
     const handleFile = (e) => {
-        console.log(e.target.files)
         setFile(e.target.files[0])
     }
 
@@ -40,6 +41,7 @@ const CreateMemory = () => {
             .then(result => {
                 setIloading(false)
                 setModals({ ...modals, createModal: false })
+                dispatch({ type: "ADD_MEMORY", payload: result.data.data.memory })
                 setFresh(true);
             })
             .catch(err => {

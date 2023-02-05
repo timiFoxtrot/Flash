@@ -24,7 +24,6 @@ const initialState = {
 }
 export const MemoryContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(memoryReducer, initialState)
-    console.log("Memories ", state)
     return (
         <MemoryContext.Provider value={{ state, dispatch }}>
             {children}

@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom"
 import SideBar from "../components/sidebar";
 import { ModalContext } from "../contexts/modalContext";
 import { ThemeConText } from "../contexts/themeContext";
+import { UserContext } from "../contexts/userContext";
 import { StyledHome } from "../styles/home.styled";
 
 
 const HomePage = () => {
+    const { userState } = useContext(UserContext)
     const [theme, setTheme] = useState(true);
     const [modals, setModals] = useState({
         createModal: false,
-        searchModal: false
+        searchModal: false,
+        editAndDelete: false
     })
 
 
