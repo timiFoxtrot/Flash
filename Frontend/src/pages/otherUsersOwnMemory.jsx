@@ -5,6 +5,8 @@ import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { UserContext } from "../contexts/userContext";
 import HashLoader from "react-spinners/ClipLoader"
+import pic from "../images/stories/avatar-male.png"
+
 
 const OtherUsersOwnMemory = () => {
     const { userState } = useContext(UserContext)
@@ -42,7 +44,9 @@ const OtherUsersOwnMemory = () => {
         <StyledOwnMemoryPage>
             <div className="container">
                 <header>
-                    <div className="img"></div>
+                    <div className="img">
+                        <img src={pic} alt="..." />
+                    </div>
                     <div>
                         <div className="flex2">
                             <h3>{user}</h3>

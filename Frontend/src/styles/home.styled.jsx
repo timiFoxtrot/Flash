@@ -11,7 +11,7 @@ export const StyledHome = styled.div`
 
 
   a{
-        text-decoration: none;
+    text-decoration: none;
     color:${(props) => props.dark === "dark" ? "#fff" : "#000"};
   }
 
@@ -20,6 +20,7 @@ export const StyledHome = styled.div`
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    scroll-behavior: smooth;
   }
 
   .headline{
@@ -27,7 +28,7 @@ export const StyledHome = styled.div`
     color: #fff;
     text-align: center;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 16px;
      background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
@@ -35,7 +36,27 @@ export const StyledHome = styled.div`
     padding: 3px;
     border-radius: 0 0 50% 50%;
     font-style: oblique;
+    position: relative;
+    cursor: pointer;
     margin-bottom: 60px;
   }
+
+  .headline span{
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    height: fit-content;
+    right: 0;
+    color: #fff;
+    border-radius: 0 0 3px 3px;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+   background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+   background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+    width: fit-content;
+    padding: 10px;
+    cursor: pointer;
+  }
+
 
 `

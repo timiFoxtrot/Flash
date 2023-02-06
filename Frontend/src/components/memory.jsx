@@ -1,8 +1,25 @@
-import { useEffect, useState } from "react";
-import { FaThumbsUp, FaComment } from "react-icons/fa";
+import { useEffect, useState, useContext } from "react";
+// import { FaThumbsUp, FaComment } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/userContext";
+import pic from "../images/stories/avatar-male.png"
+
 
 function Memory(props) {
     const [date, setDate] = useState('');
+    const { userState } = useContext(UserContext)
+
+    const navigate = useNavigate();
+
+    const navigateToOwnMemory = () => {
+        let path = ""
+        if (props?.user === userState?.user?.username) {
+            path += `/home/ownMemory/user/${userState?.user?.username}`
+        } else {
+            path += `/home/ownMemory/public/${props?.user}`
+        }
+        navigate(path)
+    }
 
     useEffect(() => {
         const handleDate = () => {
@@ -21,9 +38,12 @@ function Memory(props) {
     return (
 
         <div className="rows1">
-            <div className="cardTop">
-                <h4>{props.name}</h4>
-                <span>. {date}</span>
+            <div onClick={navigateToOwnMemory} className="cardTop">
+                <img className="imgT" src={pic} alt="..." />
+                <div className="small-flex">
+                    <h4>{props.user}</h4>
+                    <span>. {date}</span>
+                </div>
             </div>
             <div className="content-div" style={{
                 backgroundImage: `url("http://localhost:4000/static/${props.image}")`,

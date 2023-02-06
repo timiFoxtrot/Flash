@@ -73,7 +73,7 @@ const SingleMemoryPage = () => {
                 <div className="right">
                     <div className="top">
                         <div>
-                            <h3>Name</h3>
+                            <h3>{userState?.user?.username}</h3>
                         </div>
                         <Actions onClick={handleClick} />
                     </div>
