@@ -74,7 +74,7 @@ export const loginUser = async (
     console.log(email, password)
     const token = await user.genUserAuthToken();
     console.log(token)
-    res.send({ user, token });
+    res.status(200).json({ user, token });
   } catch (error: any) {
     console.log(error)
     res.status(400).json({

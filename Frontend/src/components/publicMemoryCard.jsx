@@ -46,6 +46,7 @@ function PublicMemoryCard() {
                                             location={post.location}
                                             description={post.description}
                                             date={post.createdAt}
+                                            user={post.user_id}
                                         />
                                     </div>
                                 ))

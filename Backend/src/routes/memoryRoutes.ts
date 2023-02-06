@@ -18,10 +18,10 @@ const router = express.Router();
 
 
 router.get("/", authMiddleware, getAllMemories);
+router.patch("/:id", updateMemory);
 router.get("/:id", authMiddleware, getSingleMemory);
 router.get("/user/:username", authMiddleware, getOwnMemory);
 router.post("/", authMiddleware, Upload, createMemory);
-router.patch("/:id", authMiddleware, updateMemory);
 router.delete("/:id", authMiddleware, deleteMemory);
 
 

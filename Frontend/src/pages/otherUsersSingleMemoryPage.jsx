@@ -49,7 +49,7 @@ const OtherUserSingleMemoryPage = () => {
                 <div className="right">
                     <div className="top">
                         <div>
-                            <h3>Name</h3>
+                            <h3>{memory?.user_id}</h3>
                         </div>
                     </div>
                     <section className="comment-scroll">
