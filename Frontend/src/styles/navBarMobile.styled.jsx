@@ -7,8 +7,8 @@ export const StyledNavbarMobile = styled.nav`
     left: 0;
     height: fit-content;
     padding: 0px 10px;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+     background:${(props) => props.dark === "dark" ? "#000" : "#fff"};
+    border-bottom: 1px solid ${(props) => props.dark === "dark" ? "#191818" : "#eee"};
     display: none;
     z-index: 500;
 
@@ -53,7 +53,7 @@ export const StyledNavbarMobile = styled.nav`
     
     .logo{
         cursor: pointer;
-        color: #313030; 
+        /* color: #313030;  */
         font-size: 20px;
         font-style: oblique;
         font-weight: 800;
@@ -62,6 +62,7 @@ export const StyledNavbarMobile = styled.nav`
         color: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
     }
+
     .container1{
         width: 100%;
         max-width: 100%;
@@ -78,7 +79,8 @@ export const StyledNavbarMobile = styled.nav`
    .search-box{
     width: 80%;
     max-width: 100%;
-    background-color: #eee;
+    color: #eee;
+    background:${(props) => props.dark === "dark" ? "#484646" : "#eee"};
     display: flex;
     align-items: center;
     margin-left: 20px;
@@ -94,7 +96,8 @@ export const StyledNavbarMobile = styled.nav`
     border: none;
     outline: none;
     border-radius:6px 6px 6px 6px;
-    background-color: #eee;
+    color: ${(props) => props.dark === "dark" ? "#fff" : "#000"};
+    background:${(props) => props.dark === "dark" ? "#484646" : "#eee"};
    }
 
    .display{
