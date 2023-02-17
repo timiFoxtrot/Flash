@@ -1,10 +1,10 @@
 import { FaTimes } from "react-icons/fa";
-import { Actions } from "../components/actions";
 import { StyledSingleMemoryPage } from "../styles/singlememory.style";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../contexts/userContext";
+
 
 const OtherUserSingleMemoryPage = () => {
     const { userState } = useContext(UserContext)
@@ -43,7 +43,7 @@ const OtherUserSingleMemoryPage = () => {
             <div className="container">
                 <div className="left">
                     <div className="img-box">
-                        {memory && <img src={`http://localhost:4000/static/${memory.photo}`} alt="..." />}
+                        {memory && <img src={memory.photo.url} alt="..." />}
                     </div>
                 </div>
                 <div className="right">

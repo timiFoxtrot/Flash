@@ -16,9 +16,11 @@ const Signup = () => {
   const [lastname, setLastname] = useState('');
   const [username, setUsername] = useState('');
   const [gender, setGender] = useState('');
+  const [loading, setIsloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsloading(true)
     console.log({ email, password, firstname, lastname, username, gender })
 
     try {
@@ -33,11 +35,15 @@ const Signup = () => {
           gender: gender
         }),
       })
-      const user = { username: res.data.newUser.user_name, token: res.data.token }
+      if (res) {
+       setIsloading(false)
+       const user = { username: res.data.newUser.user_name, token: res.data.token }
       localStorage.setItem("user", JSON.stringify(user))
       userDispatch({ type: "SIGNUP", payload: user })
       navigate("/home/public")
       console.log(res)
+      }
+    
     } catch (error) {
       console.log(error)
     }
@@ -96,7 +102,7 @@ const Signup = () => {
             value={password}
           />
         </div>
-        <button className='signup-btn'>SignUp</button>
+        {loading ? <button className="signup-btn">Just a Sec...</button> : <button className='signup-btn'>SignUp</button>}
         <p>Already have an account?<Link to="/login">SignIn</Link></p>
       </form>
     </StyledSignUpPage>

@@ -44,12 +44,12 @@ function LandingPage() {
                         <h1 className="alw">Flash  Into<br />
                             <span className="shift-provide"></span><span className="provide"> Your</span> <br /> <span className="memo">Memory</span><span className="provide2"></span></h1>
                         <h3 className="paratext">
-                            Easily keep track of your shared <br />experiences and reminisce on them together.
+                            Store, Preserve and Share <br /> Your memories with <br /> Friends, family or anyone.
                         </h3>
                         <button className="butIcon-signup always-own" onClick={handleAuth}>Get Started</button>
                     </div>
                     <div className="right-side">
-                        <img src={woman} alt="" width="450" height="500px" />
+                        <img className="landGirl" src={woman} alt=""  />
                     </div>
                 </div>
 

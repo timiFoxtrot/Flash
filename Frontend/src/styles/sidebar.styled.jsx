@@ -105,4 +105,9 @@ export const StyledSidebar = styled.div`
         color: ${(props) => props.dark === "dark" ? "rgba(250, 250, 250)" : "#000"};
     }
 
+
+@media only screen and (max-width: 600px) {
+   display: none;
+}
+
 `

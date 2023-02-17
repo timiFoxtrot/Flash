@@ -26,7 +26,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
 
   try {
     const { user_name } = jwt.verify(token, secret) as { user_name: string, _id: string };
-    const user = await User.findOne({ user_name }).select("user_name -_id");
+    const user = await User.findOne({ user_name }).select("user_name");
 
     if (!user) {
       return res.status(400).json({ message: 'Invalid Token' });

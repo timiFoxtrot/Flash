@@ -102,7 +102,7 @@ const CreateMemory = () => {
                         filename="image"
                     />
                 </div>
-                <button>Create</button>
+                {loading ? <button className="loadingBtn">Just a Sec...</button> : <button>Create</button>}
             </form>
         </StyledCreateMemory>
     );

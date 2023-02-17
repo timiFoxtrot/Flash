@@ -12,6 +12,7 @@ export const StyledCreateMemory = styled.div`
  max-width: 100%;
  height: fit-content;
  padding: 20px;
+ z-index: 1000;
  font-size: 16px;
  border-radius: 6px;
  z-index: 20;
@@ -86,6 +87,14 @@ export const StyledCreateMemory = styled.div`
     margin: 8px 0;
   }
 
+  .loadingBtn{
+   opacity: 0.5;
+  }
 
+
+  @media only screen and (max-width: 600px) {
+   width: 300px;
+   z-index: 2000;
+}
 
 `

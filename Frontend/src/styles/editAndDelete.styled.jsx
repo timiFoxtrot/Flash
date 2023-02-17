@@ -48,5 +48,12 @@ export const StyledEditAndDeleteModal = styled.div`
     color: #000;
    }
 
+   @media only screen and (max-width: 600px) {
+   width:300px;
+   height: 300px;
+   position: fixed;
+   
+}
+
   
 `

@@ -168,4 +168,10 @@ export const StyledSingleMemoryPage = styled.div`
         outline: none;
     }
 
+@media only screen and (max-width: 600px) {
+    .container{
+      grid-template-columns: 1fr;
+    }
+}
+
 `

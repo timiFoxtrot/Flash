@@ -1,4 +1,4 @@
-import { FaComment, FaHeart, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { Actions } from "../components/actions";
 import EditAndDelete from "../components/editAndDeleteModal";
 import { StyledSingleMemoryPage } from "../styles/singlememory.style";
@@ -67,7 +67,7 @@ const SingleMemoryPage = () => {
             <div className="container">
                 <div className="left">
                     <div className="img-box">
-                        {memory && <img src={`http://localhost:4000/static/${memory.photo}`} alt="..." />}
+                        {memory && <img src={memory.photo.url} alt="..." />}
                     </div>
                 </div>
                 <div className="right">
