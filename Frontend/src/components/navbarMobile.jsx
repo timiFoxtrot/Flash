@@ -6,9 +6,11 @@ import { ModalContext } from "../contexts/modalContext";
 import CreateMemory from "./addMemoryForm";
 import { UserContext } from "../contexts/userContext";
 import axios from "axios";
+import { ThemeConText } from "../contexts/themeContext";
 
 const NavbarMobile = () => {
-    const {userState} = useContext(UserContext)
+    const { userState } = useContext(UserContext)
+    const {theme} = useContext(ThemeConText)
     const [inputValue, setInputValue] = useState("");
     const [data, setData] = useState(null);
     const [error, setError] = useState("")
@@ -55,7 +57,7 @@ const NavbarMobile = () => {
         }
     }, [inputValue]);
   return (
-      <StyledNavbarMobile>
+      <StyledNavbarMobile dark={theme === true ? "light" : "dark"}>
            {modals.createModal && <div onClick={() => setModals({ ...modals, createModal: false })} className="shadow"><FaTimes className="times" onClick={() => setModals({ ...modals, createModal: false })} /></div>}
           {modals.createModal && <CreateMemory />}
           {inputValue && <div onClick={handleBox} className="searchShadow"></div>}

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledFooterMobile = styled.div`
-  background: #fff;
-  border-top: 1px solid #eee;
+  background:${(props) => props.dark === "dark" ? "#000" : "#fff"};
+  border-top: 1px solid ${(props) => props.dark === "dark" ? "#292828" : "#eee"};
   position: fixed;
   bottom: 0;
   width: 100vw;
@@ -11,9 +11,7 @@ export const StyledFooterMobile = styled.div`
   display: none;
   z-index:1;
 
-  .link-icon {
-    font-size: 18px;
-  }
+  
 
   .flex {
     display: flex;
@@ -63,6 +61,10 @@ export const StyledFooterMobile = styled.div`
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
   }
 
+  .icon {
+    font-size: 18px;
+      color:${(props) => props.dark === "dark" ? "#fff" : "#000"};
+  }
   
 
  
@@ -70,4 +72,5 @@ export const StyledFooterMobile = styled.div`
 @media only screen and (max-width: 600px) {
     display: block;
 }
+
 `
