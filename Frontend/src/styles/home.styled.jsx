@@ -58,5 +58,16 @@ export const StyledHome = styled.div`
     cursor: pointer;
   }
 
+  .top-top p{
+    margin: 5px 0 0 0;
+    font-size: 14px;
+  }
+
+
+@media only screen and (max-width: 600px) {
+   .headline{
+    display: none;
+   }
+}
 
 `

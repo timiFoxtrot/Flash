@@ -1,6 +1,6 @@
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { StyledSearchBarDestop } from "../styles/searchBar.Styled";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../contexts/userContext";

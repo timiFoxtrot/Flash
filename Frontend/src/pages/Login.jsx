@@ -11,12 +11,13 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loading, setIsloading] = useState(false);
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsloading(true)
+    setError('')
     try {
       console.log("anything")
       const res = await axios.post("/api/users/login", {
@@ -30,6 +31,7 @@ function Login() {
       })
      
       if (res) {
+        setIsloading(false)
       const user = { username: res.data.user.user_name, token: res.data.token }
       localStorage.setItem("user", JSON.stringify(user))
       userDispatch({type: "LOGIN", payload: user})
@@ -37,9 +39,12 @@ function Login() {
       }
       navigate("/home/public")
     } catch (err) {
+      setError("Invalid Login Credentials")
       console.log("this is err", err)
     }
-       
+    setTimeout(() => {
+        setError('')
+      },3000)
       setEmail('')
       setPassword('')
     }
@@ -66,8 +71,8 @@ function Login() {
               value={password}
             />
           </div>
-          {errorMessage && <p style={{ color: "red" }}> {errorMessage}</p>}
-          <button className="signup-btn">Login</button>
+          {error && <p style={{ color: "red" }}> {error}</p>}
+          {loading ? <button className="signup-btn">Just a Sec...</button> : <button className="signup-btn">Login</button>}
           <p>
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </p>

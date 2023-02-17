@@ -40,21 +40,23 @@ function Memory(props) {
         <div className="rows1">
             <div onClick={navigateToOwnMemory} className="cardTop">
                 <img className="imgT" src={pic} alt="..." />
-                <div className="small-flex">
-                    <h4>{props.user}</h4>
-                    <span>. {date}</span>
+                <div className="top-top">
+                     <div className="small-flex">
+                        <h4>{props.user}</h4>
+                        <span>. {date}</span>
+                    </div>
+                    <p>{props.location}</p>
                 </div>
             </div>
             <div className="content-div" style={{
-                backgroundImage: `url("http://localhost:4000/static/${props.image}")`,
+                backgroundImage: `url("${props.image}")`,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
             }}>
             </div>
             <div className="sectin-div">
-                <p className="white">#{props.location}</p>
                 <h1 className="white">{props.title}</h1>
-                <p className="white">{props.description}</p>
+                <p className="white">### {props.description}</p>
 
                 {/* <div className="like-delete">
                     <div className="like">

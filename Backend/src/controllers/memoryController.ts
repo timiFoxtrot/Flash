@@ -1,34 +1,49 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import Memory from "../models/memory";
 import User from "../models/user";
+import cloudUpload from "../utils/cloudinary";
 
 export const createMemory = async (req: Request, res: Response) => {
+  const photo = req.file?.path;
+  const { user_name, title, description, location } = req.body;
+  const user_id = req.user;
+  const comments = [{ user: "you the best" }];
   console.log(req.file);
-  console.log('USERID>>', req.user);
-  const memory = new Memory({
-    user_id: req.user,
-    user_name: req.body.user_name,
-    photo: req.file?.filename,
-    title: req.body.title,
-    description: req.body.description,
-    location: req.body.location,
-    comments: [{ user: "you the best" }],
-  });
+  console.log("USERID>>", req.user);
 
-  try {
-    const newMemory = await memory.save();
-    console.log(newMemory);
-    res.status(201).json({
-      status: "success",
-      data: {
-        memory: newMemory,
+  if (photo) {
+    const cloudImage = await cloudUpload.uploader.upload(photo, {
+      folder: "memories",
+    });
+
+    const memory = new Memory({
+      user_id: user_id,
+      user_name: user_name,
+      photo: {
+        public_id: cloudImage.public_id,
+        url: cloudImage.secure_url,
       },
+      title: title,
+      description: description,
+      location: location,
+      comments: comments,
     });
-  } catch (error: any) {
-    res.status(400).json({
-      status: "fail",
-      message: error.message,
-    });
+
+    try {
+      const newMemory = await memory.save();
+      console.log(newMemory);
+      res.status(201).json({
+        status: "success",
+        data: {
+          memory: newMemory,
+        },
+      });
+    } catch (error: any) {
+      res.status(400).json({
+        status: "fail",
+        message: error.message,
+      });
+    }
   }
 };
 
@@ -75,7 +90,7 @@ export const deleteMemory = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.params.id)
+  console.log(req.params.id);
   try {
     const memory = await Memory.findByIdAndRemove({ _id: req.params.id });
     if (!memory) {
@@ -105,9 +120,9 @@ export const getOwnMemory = async (
   next: NextFunction
 ) => {
   try {
-    const user = await User.findOne({ user_name: req.params.username })
+    const user = await User.findOne({ user_name: req.params.username });
     if (!user) {
-      return res.status(404).json('User not found');
+      return res.status(404).json("User not found");
     }
 
     const ownMemory = await Memory.find({ user_id: user.user_name });
@@ -201,7 +216,7 @@ export const getSingleMemory = async (
   next: NextFunction
 ) => {
   const id = req.params.id;
-  console.log(id)
+  console.log(id);
   try {
     const memory = await Memory.findById(id);
     if (!memory) {
@@ -214,7 +229,7 @@ export const getSingleMemory = async (
         memory,
       },
     });
-    next()
+    next();
   } catch (error) {
     res.status(404).json({
       status: "fail",
